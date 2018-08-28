@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.clf.dao.SorderTypeDAO">
+
+    <select id="selectByOrderNum" parameterType="String" resultType="com.baizhi.clf.entity.SorderTypeEntity">
+        select id,orderNum,name,phone,address,qtime
+        from s_order_type
+        where orderNum = #{orderNum}
+    </select>
+    
+    <insert id="insert">
+        INSERT INTO s_order_type
+        (id,qtime,address,phone,name,order_num)
+        values(#{id},#{qtime},#{address},#{phone},#{name},#{orderNum})
+    </insert>
+    
+    <delete id="delete" parameterType="String">
+    	delete from s_order_type where orderNum = #{orderNum}
+    </delete>
+    
+
+</mapper>
