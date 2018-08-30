@@ -15,14 +15,15 @@ import org.springframework.context.annotation.ImportResource;
 @ServletComponentScan
 @MapperScan("com.baizhi.clf.dao")
 @ImportResource("classpath:com/baizhi/clf/mvc/spring-mvc.xml")
-public class ApplicationRun extends SpringBootServletInitializer{
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        builder.sources(this.getClass());
-        return super.configure(builder);
-    }
+public class ApplicationRun extends SpringBootServletInitializer {
+	@Override
+	protected SpringApplicationBuilder configure(
+			SpringApplicationBuilder builder) {
+		builder.sources(this.getClass());
+		return super.configure(builder);
+	}
 
-    public static void main(String[] args) {
-        SpringApplication.run(ApplicationRun.class,args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(ApplicationRun.class, args);
+	}
 }

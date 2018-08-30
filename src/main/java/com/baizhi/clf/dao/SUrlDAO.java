@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface SUrlDAO {
 
-    public SurlEntity selectAdminIdByUrl(String url);
+	public SurlEntity selectAdminIdByUrl(String url);
 
-    public SurlEntity selectSurlByAdminId(String adminId);
+	public SurlEntity selectSurlByAdminId(String adminId);
 
-    public SurlEntity selectSurlByCondition(@Param("condition") String condition);
+	public SurlEntity selectSurlByCondition(@Param("condition") String condition);
 }

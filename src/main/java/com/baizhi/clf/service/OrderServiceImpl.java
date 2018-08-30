@@ -28,133 +28,135 @@ import java.util.*;
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
-    private OrderDAO orderDAO;
-    @Autowired
-    private ProductDAO productDAO;
+	@Autowired
+	private OrderDAO orderDAO;
+	@Autowired
+	private ProductDAO productDAO;
 
-    @Override
-    @Transactional
-    public String createOrder(String salary) {
+	@Override
+	@Transactional
+	public String createOrder(String salary) {
 
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes()).getRequest();
 
-        HttpSession session = request.getSession();
-        
-        SuserEntity suserEntity = (SuserEntity)session.getAttribute("user");
-        
-        
-        //获取当前店主信息
-        Admin admin = (Admin) session.getAttribute("adminMsg");
+		HttpSession session = request.getSession();
 
-        SorderEntity order = new SorderEntity();
+		SuserEntity suserEntity = (SuserEntity) session.getAttribute("user");
 
-        order.setId(UUID.randomUUID().toString());
-        String orderNo = OrderNumUtil.getOrderNo();
-        order.setOrderNum(orderNo);
-        order.setOrderSalary(new Double(salary));
-        order.setOrderStatus("待处理");
-        order.setTime(new Date());
+		// 获取当前店主信息
+		Admin admin = (Admin) session.getAttribute("adminMsg");
 
-        order.setUserId(suserEntity.getId());
-        order.setAdminId(admin.getId());
+		SorderEntity order = new SorderEntity();
 
+		order.setId(UUID.randomUUID().toString());
+		String orderNo = OrderNumUtil.getOrderNo();
+		order.setOrderNum(orderNo);
+		order.setOrderSalary(new Double(salary));
+		order.setOrderStatus("待处理");
+		order.setTime(new Date());
 
-        //插入订单数据
-        orderDAO.insertOrder(order);
-        GoEasy goEasy = new GoEasy("BC-57c75abca21540b89bf00e84e5d7c7f6");
-        goEasy.publish(admin.getId(), "您有一个新订单，请及时处理！！！");
-        //添加当前订单信息入库 并添加订单项
-        Map<String, CartCarVO> cartCar = (Map<String, CartCarVO>) session.getAttribute("cartCar");
+		order.setUserId(suserEntity.getId());
+		order.setAdminId(admin.getId());
 
-        //构建订单项数据并插入
-        for (String s : cartCar.keySet()) {
-            SorderItemEntity orderItem = new SorderItemEntity();
-            CartCarVO cartCarVO = cartCar.get(s);
-            SproductEntity sproductEntity = cartCarVO.getSproductEntity();
+		// 插入订单数据
+		orderDAO.insertOrder(order);
+		GoEasy goEasy = new GoEasy("BC-57c75abca21540b89bf00e84e5d7c7f6");
+		goEasy.publish(admin.getId(), "您有一个新订单，请及时处理！！！");
+		// 添加当前订单信息入库 并添加订单项
+		Map<String, CartCarVO> cartCar = (Map<String, CartCarVO>) session.getAttribute("cartCar");
 
-            orderItem.setId(UUID.randomUUID().toString());
-            orderItem.setPrice(sproductEntity.getPrice());
-            orderItem.setProductId(sproductEntity.getId());
-            orderItem.setCount(cartCarVO.getCount());
-            orderItem.setOrderId(orderNo);
-            orderItem.setName(sproductEntity.getName());
-            orderItem.setDescription(sproductEntity.getDescription());
-            orderItem.setImgsrc(sproductEntity.getImgsrc());
-            orderItem.setProductNum(sproductEntity.getProductNum());
+		// 构建订单项数据并插入
+		for (String s : cartCar.keySet()) {
+			SorderItemEntity orderItem = new SorderItemEntity();
+			CartCarVO cartCarVO = cartCar.get(s);
+			SproductEntity sproductEntity = cartCarVO.getSproductEntity();
 
-            orderDAO.insertOrderItem(orderItem);
-        }
-        //插入完数据清空购物车
-        session.setAttribute("cartCar", null);
-        return orderNo;
-    }
+			orderItem.setId(UUID.randomUUID().toString());
+			orderItem.setPrice(sproductEntity.getPrice());
+			orderItem.setProductId(sproductEntity.getId());
+			orderItem.setCount(cartCarVO.getCount());
+			orderItem.setOrderId(orderNo);
+			orderItem.setName(sproductEntity.getName());
+			orderItem.setDescription(sproductEntity.getDescription());
+			orderItem.setImgsrc(sproductEntity.getImgsrc());
+			orderItem.setProductNum(sproductEntity.getProductNum());
 
-    @Override
-    public List<Map<SorderEntity, List<CartCarVO>>> findOrders() {
-    	
-    	System.out.println("----------------------");
-    	
-        //订单项数据   包含 订单对象 -- >对应多个 购物车对象
-        List<Map<SorderEntity, List<CartCarVO>>> data = new ArrayList<Map<SorderEntity, List<CartCarVO>>>();
+			orderDAO.insertOrderItem(orderItem);
+		}
+		// 插入完数据清空购物车
+		session.setAttribute("cartCar", null);
+		return orderNo;
+	}
 
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+	@Override
+	public List<Map<SorderEntity, List<CartCarVO>>> findOrders() {
 
-        HttpSession session = request.getSession();
+		System.out.println("----------------------");
 
-        //获取当前店主信息
-        Admin admin = (Admin) session.getAttribute("adminMsg");
+		// 订单项数据 包含 订单对象 -- >对应多个 购物车对象
+		List<Map<SorderEntity, List<CartCarVO>>> data = new ArrayList<Map<SorderEntity, List<CartCarVO>>>();
 
-        System.out.println("sessionAdmin:"+admin);
-        
-        SorderEntity sorderEntity = new SorderEntity();
-        sorderEntity.setAdminId(admin.getId());
-     
-        SuserEntity user = (SuserEntity) session.getAttribute("user");
-        
-        System.out.println("sessionUser:"+user);
-        
-        sorderEntity.setUserId(user.getId());
-        //通过  外键和 店主id 获取用户在当前店铺的订单数据
-        List<SorderEntity> sorderEntities = orderDAO.selectOrders(sorderEntity);
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes()).getRequest();
 
-        //构建订单页数据
-        for (SorderEntity entity : sorderEntities) {
-        	
-        	System.out.println(entity);
-        	
-            //通过订单获取用户的订单项数据
-            HashMap<SorderEntity, List<CartCarVO>> map = new HashMap<SorderEntity, List<CartCarVO>>();
+		HttpSession session = request.getSession();
 
-            ArrayList<CartCarVO> cartCarVOs = new ArrayList<CartCarVO>();
+		// 获取当前店主信息
+		Admin admin = (Admin) session.getAttribute("adminMsg");
 
-            String orderNum = entity.getOrderNum();
+		System.out.println("sessionAdmin:" + admin);
 
-            List<SorderItemEntity> sorderItemEntities = orderDAO.selectOrderItem(orderNum);
+		SorderEntity sorderEntity = new SorderEntity();
+		sorderEntity.setAdminId(admin.getId());
 
-            for (SorderItemEntity sorderItemEntity : sorderItemEntities) {
+		SuserEntity user = (SuserEntity) session.getAttribute("user");
 
-                CartCarVO cartCarVO = new CartCarVO();
+		System.out.println("sessionUser:" + user);
 
-                cartCarVO.setCount(sorderItemEntity.getCount());
+		sorderEntity.setUserId(user.getId());
+		// 通过 外键和 店主id 获取用户在当前店铺的订单数据
+		List<SorderEntity> sorderEntities = orderDAO.selectOrders(sorderEntity);
 
-                SproductEntity sproductEntity = new SproductEntity();
-                //添加商品对象数据
-                sproductEntity.setPrice(sorderItemEntity.getPrice());
-                sproductEntity.setImgsrc(sorderItemEntity.getImgsrc());
-                sproductEntity.setDescription(sorderItemEntity.getDescription());
-                sproductEntity.setName(sorderItemEntity.getName());
+		// 构建订单页数据
+		for (SorderEntity entity : sorderEntities) {
 
-                cartCarVO.setSproductEntity(sproductEntity);
+			System.out.println(entity);
 
-                cartCarVOs.add(cartCarVO);
-            }
-            //构建一个订单页数据
-            map.put(entity, cartCarVOs);
+			// 通过订单获取用户的订单项数据
+			HashMap<SorderEntity, List<CartCarVO>> map = new HashMap<SorderEntity, List<CartCarVO>>();
 
-            data.add(map);
-        }
+			ArrayList<CartCarVO> cartCarVOs = new ArrayList<CartCarVO>();
 
-        return data;
-    }
+			String orderNum = entity.getOrderNum();
+
+			List<SorderItemEntity> sorderItemEntities = orderDAO
+					.selectOrderItem(orderNum);
+
+			for (SorderItemEntity sorderItemEntity : sorderItemEntities) {
+
+				CartCarVO cartCarVO = new CartCarVO();
+
+				cartCarVO.setCount(sorderItemEntity.getCount());
+
+				SproductEntity sproductEntity = new SproductEntity();
+				// 添加商品对象数据
+				sproductEntity.setPrice(sorderItemEntity.getPrice());
+				sproductEntity.setImgsrc(sorderItemEntity.getImgsrc());
+				sproductEntity
+						.setDescription(sorderItemEntity.getDescription());
+				sproductEntity.setName(sorderItemEntity.getName());
+
+				cartCarVO.setSproductEntity(sproductEntity);
+
+				cartCarVOs.add(cartCarVO);
+			}
+			// 构建一个订单页数据
+			map.put(entity, cartCarVOs);
+
+			data.add(map);
+		}
+
+		return data;
+	}
 }

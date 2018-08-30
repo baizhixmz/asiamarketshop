@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface CategoryService {
 
-    public List<ScategoryEntity> findCategorys(String adminId);
+	public List<ScategoryEntity> findCategorys(String adminId);
 }

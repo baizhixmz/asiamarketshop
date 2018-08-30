@@ -10,12 +10,14 @@ import java.util.List;
  */
 public interface ProductService {
 
-    public List<SproductEntity> findProductsByCategoryId(String adminId,String categoryId,Page page);
+	public List<SproductEntity> findProductsByCategoryId(String adminId,
+			String categoryId, Page page);
 
-    public List<SproductEntity> findProductsMain(String adminId,String condition);
+	public List<SproductEntity> findProductsMain(String adminId,
+			String condition);
 
-    public SproductEntity findProductDetail(String id);
+	public SproductEntity findProductDetail(String id);
 
-    public List<SproductEntity> findProductsByDsql(Page page,String condition);
+	public List<SproductEntity> findProductsByDsql(Page page, String condition);
 
 }

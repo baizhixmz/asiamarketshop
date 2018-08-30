@@ -15,17 +15,17 @@ import com.baizhi.clf.service.UserServiceImpl;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class TestUser {
-		
+
 	@Autowired
 	private UserService service;
-	
+
 	@Test
-	public void testQuery(){
-		
+	public void testQuery() {
+
 		SuserEntity user = service.findByCookid("1111");
-		
+
 		System.out.println(user.getPhone());
-		
+
 	}
-	
+
 }

@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Configuration
 public class ErrorConfig implements ErrorController {
 
-    private static final String ERROR_PATH = "/static";
+	private static final String ERROR_PATH = "/static";
 
-    @RequestMapping(value=ERROR_PATH)
-    public String handleError(){
-        return "404";
-    }
+	@RequestMapping(value = ERROR_PATH)
+	public String handleError() {
+		return "404";
+	}
 
-    @Override
-    public String getErrorPath() {
-        return ERROR_PATH;
-    }
+	@Override
+	public String getErrorPath() {
+		return ERROR_PATH;
+	}
 
 }

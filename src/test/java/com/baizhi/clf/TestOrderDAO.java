@@ -13,24 +13,22 @@ import java.util.List;
  */
 public class TestOrderDAO extends BaseTest {
 
-    @Autowired
-    private OrderDAO orderDAO;
+	@Autowired
+	private OrderDAO orderDAO;
 
+	@Test
+	public void testOrderDAO() {
 
-    @Test
-    public void testOrderDAO(){
+		SorderEntity sorderEntity = new SorderEntity();
 
-        SorderEntity sorderEntity = new SorderEntity();
+		sorderEntity.setShopId("8a8ab0b246dc81120146dc8181950052");
+		sorderEntity.setAdminId("40289781624134e10162413b3a3c0001");
 
-        sorderEntity.setShopId("8a8ab0b246dc81120146dc8181950052");
-        sorderEntity.setAdminId("40289781624134e10162413b3a3c0001");
+		List<SorderEntity> order = orderDAO.selectOrders(sorderEntity);
 
-        List<SorderEntity> order = orderDAO.selectOrders(sorderEntity);
-
-
-        List<SorderItemEntity> sorderItemEntities = orderDAO.selectOrderItem(order.get(0).getOrderNum());
-        System.out.println(sorderItemEntities);
-    }
-
+		List<SorderItemEntity> sorderItemEntities = orderDAO
+				.selectOrderItem(order.get(0).getOrderNum());
+		System.out.println(sorderItemEntities);
+	}
 
 }

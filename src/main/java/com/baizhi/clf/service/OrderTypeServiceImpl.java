@@ -13,12 +13,12 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
 	@Autowired
 	private SorderTypeDAO sorderTypeDAO;
-	
+
 	@Override
 	public SorderTypeEntity findByOrderNum(String orderNum) {
-		
+
 		SorderTypeEntity orderType = sorderTypeDAO.selectByOrderNum(orderNum);
-		
+
 		return orderType;
 	}
 

@@ -15,15 +15,16 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+	@Autowired
+	private CategoryService categoryService;
 
-    @RequestMapping("/findCategorys")
-    public List<ScategoryEntity> findCategorys(String adminId){
+	@RequestMapping("/findCategorys")
+	public List<ScategoryEntity> findCategorys(String adminId) {
 
-        List<ScategoryEntity> categorys = categoryService.findCategorys(adminId);
+		List<ScategoryEntity> categorys = categoryService
+				.findCategorys(adminId);
 
-        return categorys;
-    }
+		return categorys;
+	}
 
 }

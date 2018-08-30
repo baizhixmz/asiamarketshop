@@ -7,6 +7,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
+
 public class PasswordUtil {
 
 	/**
@@ -17,8 +18,8 @@ public class PasswordUtil {
 	/**
 	 * 定义使用的算法为:PBEWITHMD5andDES算法
 	 */
-	public static final String ALGORITHM = "PBEWithMD5AndDES";//加密算法
-	public static final String Salt = "63293188";//密钥
+	public static final String ALGORITHM = "PBEWithMD5AndDES";// 加密算法
+	public static final String Salt = "63293188";// 密钥
 
 	/**
 	 * 定义迭代次数为1000次
@@ -82,7 +83,8 @@ public class PasswordUtil {
 
 		Key key = getPBEKey(password);
 		byte[] encipheredData = null;
-		PBEParameterSpec parameterSpec = new PBEParameterSpec(salt, ITERATIONCOUNT);
+		PBEParameterSpec parameterSpec = new PBEParameterSpec(salt,
+				ITERATIONCOUNT);
 		try {
 			Cipher cipher = Cipher.getInstance(ALGORITHM);
 
@@ -110,7 +112,8 @@ public class PasswordUtil {
 
 		Key key = getPBEKey(password);
 		byte[] passDec = null;
-		PBEParameterSpec parameterSpec = new PBEParameterSpec(getStaticSalt(), ITERATIONCOUNT);
+		PBEParameterSpec parameterSpec = new PBEParameterSpec(getStaticSalt(),
+				ITERATIONCOUNT);
 		try {
 			Cipher cipher = Cipher.getInstance(ALGORITHM);
 
@@ -174,27 +177,25 @@ public class PasswordUtil {
 	}
 
 	public static void main(String[] args) {
-		int i=10;
+		int i = 10;
 		for (int j = 0; j < i; j++) {
-			if((j)%3==0)
-			{
+			if ((j) % 3 == 0) {
 				System.out.print("<br>");
-			}
-			else {
+			} else {
 				System.out.print(j);
 			}
 		}
-		System.out.print(-1%2==0);
+		System.out.print(-1 % 2 == 0);
 		String str = "root";
 		String password = "root";
-
 
 		try {
 			byte[] salt = PasswordUtil.getStaticSalt();
 			String ciphertext = PasswordUtil.encrypt(str, password, salt);
 			String plaintext = PasswordUtil.decrypt(ciphertext, password, salt);
 
-			String result = PasswordUtil.decrypt("ea3d519525358e00", "root", salt);
+			String result = PasswordUtil.decrypt("ea3d519525358e00", "root",
+					salt);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -25,31 +25,32 @@ import java.util.UUID;
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserDAO userDAO;
+	@Autowired
+	private UserDAO userDAO;
 
-    @Autowired
-    private AdminDAO adminDAO;
+	@Autowired
+	private AdminDAO adminDAO;
 
-    @Override
-    public String regist(String cookieId) {
+	@Override
+	public String regist(String cookieId) {
 
-        SuserEntity suserEntity = new SuserEntity();
-        
-        suserEntity.setId(UUID.randomUUID().toString());
-        
-        suserEntity.setCookieid(cookieId);
+		SuserEntity suserEntity = new SuserEntity();
 
-        userDAO.insertUser(suserEntity);
+		suserEntity.setId(UUID.randomUUID().toString());
 
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		suserEntity.setCookieid(cookieId);
 
-        HttpSession session = request.getSession();
+		userDAO.insertUser(suserEntity);
 
-        session.setAttribute("user",suserEntity);
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes()).getRequest();
 
-        return "success";
-    }
+		HttpSession session = request.getSession();
+
+		session.setAttribute("user", suserEntity);
+
+		return "success";
+	}
 
 	@Override
 	public SuserEntity findByCookid(String cookieId) {
@@ -60,9 +61,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String update(SuserEntity suserEntity) {
-		
+
 		userDAO.updateUser(suserEntity);
-		
+
 		return null;
 	}
 }

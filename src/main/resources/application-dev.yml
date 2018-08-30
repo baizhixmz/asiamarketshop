@@ -14,6 +14,13 @@ spring:
 mybatis:
   type-aliases-package: com.baizhi.clf.entity
   mapper-locations: com/baizhi/clf/mapper/*DAOImpl.xml
+  
+#配置日志
+logging:
+  level:
+    com.baizhi.clf: DEBUG
+  file: ./logs/asiamarket.log
+  root: INFO
 
 
 

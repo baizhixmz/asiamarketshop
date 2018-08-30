@@ -11,6 +11,6 @@ import java.util.Map;
  */
 public interface CategoryDAO {
 
-    public ScategoryEntity selectCategoryById(String categoryId);
+	public ScategoryEntity selectCategoryById(String categoryId);
 
 }

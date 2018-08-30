@@ -20,29 +20,30 @@ import java.util.Map;
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
-    private AdminRelationDAO adminRelationDAO;
+	@Autowired
+	private AdminRelationDAO adminRelationDAO;
 
-    @Autowired
-    private CategoryDAO  categoryDAO;
+	@Autowired
+	private CategoryDAO categoryDAO;
 
-    @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
-    @Override
-    public List<ScategoryEntity> findCategorys(String adminId) {
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+	@Override
+	public List<ScategoryEntity> findCategorys(String adminId) {
 
-        List<SadminCategoryEntity> adminCategorys = adminRelationDAO.selectAdminCategorys(adminId);
+		List<SadminCategoryEntity> adminCategorys = adminRelationDAO
+				.selectAdminCategorys(adminId);
 
+		ArrayList<ScategoryEntity> categorys = new ArrayList<ScategoryEntity>();
 
-        ArrayList<ScategoryEntity> categorys = new ArrayList<ScategoryEntity>();
+		// 添加类别列表
+		for (SadminCategoryEntity adminCategory : adminCategorys) {
 
-        //添加类别列表
-        for (SadminCategoryEntity adminCategory : adminCategorys) {
+			ScategoryEntity scategoryEntity = categoryDAO
+					.selectCategoryById(adminCategory.getCategoryId());
 
-            ScategoryEntity scategoryEntity = categoryDAO.selectCategoryById(adminCategory.getCategoryId());
+			categorys.add(scategoryEntity);
+		}
 
-            categorys.add(scategoryEntity);
-        }
-
-        return categorys;
-    }
+		return categorys;
+	}
 }

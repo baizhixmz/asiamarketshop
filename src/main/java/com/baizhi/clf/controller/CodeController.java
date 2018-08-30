@@ -29,13 +29,14 @@ public class CodeController {
 		session.setAttribute("code", vCode.getCode());
 		vCode.write(response.getOutputStream());
 	}
+
 	@ResponseBody
 	@RequestMapping("validateCheck")
-	public  String  validateImage(HttpServletRequest request, String  validate){
-		String  code = (String) request.getSession().getAttribute("code");
-		if(code.equalsIgnoreCase(validate)){
+	public String validateImage(HttpServletRequest request, String validate) {
+		String code = (String) request.getSession().getAttribute("code");
+		if (code.equalsIgnoreCase(validate)) {
 			return "success";
-		}else{
+		} else {
 			return "error";
 		}
 	}

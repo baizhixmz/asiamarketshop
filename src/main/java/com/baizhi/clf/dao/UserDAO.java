@@ -7,11 +7,10 @@ import com.baizhi.clf.entity.SuserEntity;
  */
 public interface UserDAO {
 
-    public SuserEntity selectUserByUsername(String cookieid);
+	public SuserEntity selectUserByUsername(String cookieid);
 
-    public void insertUser(SuserEntity user);
-    
-    public void updateUser(SuserEntity suserEntity);
-    
-    
+	public void insertUser(SuserEntity user);
+
+	public void updateUser(SuserEntity suserEntity);
+
 }

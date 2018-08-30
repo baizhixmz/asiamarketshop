@@ -21,77 +21,80 @@ import java.util.Locale;
  */
 @WebFilter(urlPatterns = "/netShoppp/*", filterName = "f4")
 public class D_LanguageFilter implements Filter {
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
 
-    }
+	}
 
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain filterChain) throws IOException, ServletException {
 
-        HttpServletRequest request2 = (HttpServletRequest) request;
-        HttpServletResponse response2 = (HttpServletResponse) response;
-        HttpSession session = request2.getSession();
+		HttpServletRequest request2 = (HttpServletRequest) request;
+		HttpServletResponse response2 = (HttpServletResponse) response;
+		HttpSession session = request2.getSession();
 
-        Admin admin = (Admin) session.getAttribute("adminMsg");
+		Admin admin = (Admin) session.getAttribute("adminMsg");
 
-        //获取请求的url
-        String str = request2.getRequestURL().toString();
+		// 获取请求的url
+		String str = request2.getRequestURL().toString();
 
-        String contextPath = request2.getContextPath();
+		String contextPath = request2.getContextPath();
 
-        Locale locale = request2.getLocale();
-        //获取请求的浏览器语言
-        String language = locale.getLanguage();
-        //获取请求的方式
-        String userAgent = request2.getHeader("user-agent");
+		Locale locale = request2.getLocale();
+		// 获取请求的浏览器语言
+		String language = locale.getLanguage();
+		// 获取请求的方式
+		String userAgent = request2.getHeader("user-agent");
 
-        System.out.println(language);
-        if (language.startsWith("zh")) {
-            //跳转中文界面
+		System.out.println(language);
+		if (language.startsWith("zh")) {
+			// 跳转中文界面
 
-            //if (userAgent.indexOf("Android") != -1 || userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") != -1) {
-                //手机
-                if(admin.getUsername().equals("SuperAdmin")){
-                    response2.sendRedirect(contextPath+"/webApp-shop/login.jsp");
-                }else{
-                    response2.sendRedirect(contextPath+"/webApp-shop/home.jsp?adminId="+admin.getId());
-                }
-                return;
-            /*} else {
-                //电脑
-                if(admin.getUsername().equals("SuperAdmin")){
-                    response2.sendRedirect(contextPath+"/chinaPage/page/login.jsp");
-                }else{
-                    response2.sendRedirect(contextPath+"/chinaPage/page/booklist.jsp?adminId="+admin.getId());
-                }
-                return;
-            }*/
+			// if (userAgent.indexOf("Android") != -1 ||
+			// userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") !=
+			// -1) {
+			// 手机
+			if (admin.getUsername().equals("SuperAdmin")) {
+				response2.sendRedirect(contextPath + "/webApp-shop/login.jsp");
+			} else {
+				response2.sendRedirect(contextPath
+						+ "/webApp-shop/home.jsp?adminId=" + admin.getId());
+			}
+			return;
+			/*
+			 * } else { //电脑 if(admin.getUsername().equals("SuperAdmin")){
+			 * response2.sendRedirect(contextPath+"/chinaPage/page/login.jsp");
+			 * }else{ response2.sendRedirect(contextPath+
+			 * "/chinaPage/page/booklist.jsp?adminId="+admin.getId()); } return;
+			 * }
+			 */
 
-        } else {
-            //跳转意大利界面
-            //if (userAgent.indexOf("Android") != -1 || userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") != -1) {
-                //手机
-                if(admin.getUsername().equals("SuperAdmin")){
-                    response2.sendRedirect(contextPath+"/webApp-shop2/login.jsp");
-                }else{
-                    response2.sendRedirect(contextPath+"/webApp-shop2/home.jsp?adminId="+admin.getId());
-                }
-                return;
-           /* } else {
-                //电脑
-                if(admin.getUsername().equals("SuperAdmin")){
-                    response2.sendRedirect(contextPath+"/italyPage/page/login.jsp");
-                }else{
-                    response2.sendRedirect(contextPath+"/italyPage/page/booklist.jsp?adminId="+admin.getId());
-                }
-                return;
-            }*/
-        }
-    }
+		} else {
+			// 跳转意大利界面
+			// if (userAgent.indexOf("Android") != -1 ||
+			// userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") !=
+			// -1) {
+			// 手机
+			if (admin.getUsername().equals("SuperAdmin")) {
+				response2.sendRedirect(contextPath + "/webApp-shop2/login.jsp");
+			} else {
+				response2.sendRedirect(contextPath
+						+ "/webApp-shop2/home.jsp?adminId=" + admin.getId());
+			}
+			return;
+			/*
+			 * } else { //电脑 if(admin.getUsername().equals("SuperAdmin")){
+			 * response2.sendRedirect(contextPath+"/italyPage/page/login.jsp");
+			 * }else{ response2.sendRedirect(contextPath+
+			 * "/italyPage/page/booklist.jsp?adminId="+admin.getId()); } return;
+			 * }
+			 */
+		}
+	}
 
-    @Override
-    public void destroy() {
+	@Override
+	public void destroy() {
 
-    }
+	}
 }

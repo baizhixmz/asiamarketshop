@@ -7,10 +7,9 @@ import com.baizhi.clf.entity.SuserEntity;
  */
 public interface UserService {
 
-    
-    public SuserEntity findByCookid(String cookieid);
-    
-    public String regist(String cookieId);
-    
-    public String update(SuserEntity suserEntity);
+	public SuserEntity findByCookid(String cookieid);
+
+	public String regist(String cookieId);
+
+	public String update(SuserEntity suserEntity);
 }

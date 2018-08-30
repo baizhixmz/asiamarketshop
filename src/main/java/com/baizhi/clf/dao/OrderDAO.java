@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface OrderDAO {
 
-    public void insertOrder(SorderEntity sorderEntity);
+	public void insertOrder(SorderEntity sorderEntity);
 
-    public void insertOrderItem(SorderItemEntity sorderItemEntity);
+	public void insertOrderItem(SorderItemEntity sorderItemEntity);
 
-    public List<SorderEntity> selectOrders(SorderEntity sorderEntity);
+	public List<SorderEntity> selectOrders(SorderEntity sorderEntity);
 
-    public List<SorderItemEntity> selectOrderItem(String orderNum);
+	public List<SorderItemEntity> selectOrderItem(String orderNum);
 }

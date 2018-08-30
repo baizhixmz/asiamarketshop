@@ -7,7 +7,7 @@ import com.baizhi.clf.entity.Admin;
  */
 public interface AdminDAO {
 
-    public Admin selectAdminById(String adminId);
+	public Admin selectAdminById(String adminId);
 
-    public Admin selectAdminByUsername(String username);
+	public Admin selectAdminByUsername(String username);
 }

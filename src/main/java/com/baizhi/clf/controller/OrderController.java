@@ -28,65 +28,66 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/order")
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
-    
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private OrderTypeService orderTypeService;
+	@Autowired
+	private OrderService orderService;
 
-    @RequestMapping("/createOrder")
-    public String createOrder(String salary,String name,String phone,String address,String qtime,HttpServletRequest request){
-    	
-    	HttpSession session = request.getSession();
-    	
-    	if(name != null && phone != null && address != null){
-    		SuserEntity user = (SuserEntity)session.getAttribute("user");
-	    	user.setName(name);
-	    	user.setPhone(phone);
-	    	user.setAddress(address);
-	    	userService.update(user);
-    	}
-    	
-        String result = orderService.createOrder(salary);
-        
-        SorderTypeEntity sorderTypeEntity = new SorderTypeEntity();
-        sorderTypeEntity.setId(UUID.randomUUID().toString());
-        sorderTypeEntity.setOrderNum(result);
-        sorderTypeEntity.setName(name);
-        sorderTypeEntity.setPhone(phone);
-        sorderTypeEntity.setAddress(address);
-        sorderTypeEntity.setQtime(qtime);
-        
-        orderTypeService.add(sorderTypeEntity);
-        
-        return result;
-    }
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private OrderTypeService orderTypeService;
 
-    @RequestMapping("/findMyOrder")
-    public List<OrderDTO> findMyOrder(){
+	@RequestMapping("/createOrder")
+	public String createOrder(String salary, String name, String phone,
+			String address, String qtime, HttpServletRequest request) {
 
-        //由于前台js不支持复杂的json转换所以这里边转换为简单结构
-        List<Map<SorderEntity, List<CartCarVO>>> orders = orderService.findOrders();
+		HttpSession session = request.getSession();
 
-        ArrayList<OrderDTO> dtoArrayList = new ArrayList<OrderDTO>();
+		if (name != null && phone != null && address != null) {
+			SuserEntity user = (SuserEntity) session.getAttribute("user");
+			user.setName(name);
+			user.setPhone(phone);
+			user.setAddress(address);
+			userService.update(user);
+		}
 
-        for (Map<SorderEntity, List<CartCarVO>> order : orders) {
+		String result = orderService.createOrder(salary);
 
-            for (SorderEntity sorderEntity : order.keySet()) {
+		SorderTypeEntity sorderTypeEntity = new SorderTypeEntity();
+		sorderTypeEntity.setId(UUID.randomUUID().toString());
+		sorderTypeEntity.setOrderNum(result);
+		sorderTypeEntity.setName(name);
+		sorderTypeEntity.setPhone(phone);
+		sorderTypeEntity.setAddress(address);
+		sorderTypeEntity.setQtime(qtime);
 
-                OrderDTO orderDTO = new OrderDTO();
+		orderTypeService.add(sorderTypeEntity);
 
-                orderDTO.setSorderEntity(sorderEntity);
+		return result;
+	}
 
-                orderDTO.setCartCarVO(order.get(sorderEntity));
+	@RequestMapping("/findMyOrder")
+	public List<OrderDTO> findMyOrder() {
 
-                dtoArrayList.add(orderDTO);
-            }
-        }
-        
-        
-        return dtoArrayList;
-    }
+		// 由于前台js不支持复杂的json转换所以这里边转换为简单结构
+		List<Map<SorderEntity, List<CartCarVO>>> orders = orderService
+				.findOrders();
+
+		ArrayList<OrderDTO> dtoArrayList = new ArrayList<OrderDTO>();
+
+		for (Map<SorderEntity, List<CartCarVO>> order : orders) {
+
+			for (SorderEntity sorderEntity : order.keySet()) {
+
+				OrderDTO orderDTO = new OrderDTO();
+
+				orderDTO.setSorderEntity(sorderEntity);
+
+				orderDTO.setCartCarVO(order.get(sorderEntity));
+
+				dtoArrayList.add(orderDTO);
+			}
+		}
+
+		return dtoArrayList;
+	}
 }

@@ -19,52 +19,59 @@ import java.util.Map;
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+	@Autowired
+	private ProductService productService;
 
-    @RequestMapping("/findProductsByCategoryId")
-    public List<SproductEntity> findProductsByCategoryId(String adminId, String categoryId, Integer pageIndex) {
+	@RequestMapping("/findProductsByCategoryId")
+	public List<SproductEntity> findProductsByCategoryId(String adminId,
+			String categoryId, Integer pageIndex) {
 
-        List<SproductEntity> products;
+		List<SproductEntity> products;
 
-        Page page = new Page(pageIndex);
-        products = productService.findProductsByCategoryId(adminId, categoryId, page);
+		Page page = new Page(pageIndex);
+		products = productService.findProductsByCategoryId(adminId, categoryId,
+				page);
 
+		return products;
+	}
 
-        return products;
-    }
+	@RequestMapping("/findProductsMain")
+	public List<SproductEntity> findProductsMain(String adminId,
+			String condition) {
 
-    @RequestMapping("/findProductsMain")
-    public List<SproductEntity> findProductsMain(String adminId, String condition) {
+		List<SproductEntity> products = productService.findProductsMain(
+				adminId, condition);
 
-        List<SproductEntity> products = productService.findProductsMain(adminId, condition);
+		return products;
 
-        return products;
+	}
 
-    }
-    @RequestMapping("/findProductDetail")
-    public SproductEntity findProductDetail(String id){
+	@RequestMapping("/findProductDetail")
+	public SproductEntity findProductDetail(String id) {
 
-        SproductEntity productDetail = productService.findProductDetail(id);
+		SproductEntity productDetail = productService.findProductDetail(id);
 
-        return productDetail;
-    }
+		return productDetail;
+	}
 
-    @RequestMapping("/findProductsByDsql")
-    public List<SproductEntity>findProductsByDsql(String condition, Integer index, HttpSession session){
+	@RequestMapping("/findProductsByDsql")
+	public List<SproductEntity> findProductsByDsql(String condition,
+			Integer index, HttpSession session) {
 
-        Page page = new Page(index);
+		Page page = new Page(index);
 
-        List<SproductEntity> productsByDsql = productService.findProductsByDsql(page, condition);
+		List<SproductEntity> productsByDsql = productService
+				.findProductsByDsql(page, condition);
 
-        session.setAttribute("page",page);
+		session.setAttribute("page", page);
 
-        return productsByDsql;
-    }
-    @RequestMapping("/findPageMsg")
-    public Page findPageMsg(HttpSession session){
-        Page page = (Page)session.getAttribute("page");
+		return productsByDsql;
+	}
 
-        return page;
-    }
+	@RequestMapping("/findPageMsg")
+	public Page findPageMsg(HttpSession session) {
+		Page page = (Page) session.getAttribute("page");
+
+		return page;
+	}
 }

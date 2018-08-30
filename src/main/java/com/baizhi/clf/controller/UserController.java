@@ -20,39 +20,37 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    
-    @RequestMapping("/register")
-    public String register(String cookieId,HttpServletResponse response){
+	@RequestMapping("/register")
+	public String register(String cookieId, HttpServletResponse response) {
 
-        userService.regist(cookieId);
-        
-        return "success";
-    }
-    
-    @RequestMapping("/findOneById")
-    public SuserEntity findOneById(String cookieId,HttpServletRequest request){
-    	
-    	SuserEntity suserEntity = userService.findByCookid(cookieId);
-    	
-    	return suserEntity;
-    	
-    }
-    
-    @RequestMapping("/getUser")
-    public String getUser(String cookieId,HttpServletRequest request){
-    	
-    	SuserEntity user = userService.findByCookid(cookieId);
-    	
-    	HttpSession session = request.getSession();
-    	
-    	session.setAttribute("user", user);
-    	
-    	return "success";
-    	
-    }
-    
-   
+		userService.regist(cookieId);
+
+		return "success";
+	}
+
+	@RequestMapping("/findOneById")
+	public SuserEntity findOneById(String cookieId, HttpServletRequest request) {
+
+		SuserEntity suserEntity = userService.findByCookid(cookieId);
+
+		return suserEntity;
+
+	}
+
+	@RequestMapping("/getUser")
+	public String getUser(String cookieId, HttpServletRequest request) {
+
+		SuserEntity user = userService.findByCookid(cookieId);
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute("user", user);
+
+		return "success";
+
+	}
+
 }

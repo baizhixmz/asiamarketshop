@@ -8,10 +8,11 @@ import org.junit.Test;
  */
 public class TestPasswordUtil {
 
-    @Test
-    public void test(){
-        String encrypt = PasswordUtil.encrypt("SuperAdmin","123123", PasswordUtil.getStaticSalt());
+	@Test
+	public void test() {
+		String encrypt = PasswordUtil.encrypt("SuperAdmin", "123123",
+				PasswordUtil.getStaticSalt());
 
-        System.out.println(encrypt);
-    }
+		System.out.println(encrypt);
+	}
 }
