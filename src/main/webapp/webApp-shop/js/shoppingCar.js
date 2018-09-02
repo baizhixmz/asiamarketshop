@@ -60,6 +60,7 @@ $(function(){
     })
 
     $("#btnSure").on("touchend",function(){
+    	console.log("======================");
     	var goodsId = num.parent().parent(".option").attr("data-goodsId");
         $("#mask").hide();
         $(this).siblings('input').val("0");

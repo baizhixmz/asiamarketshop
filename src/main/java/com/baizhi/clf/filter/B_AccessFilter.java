@@ -4,6 +4,9 @@ import com.baizhi.clf.dao.AdminDAO;
 import com.baizhi.clf.dao.SUrlDAO;
 import com.baizhi.clf.entity.Admin;
 import com.baizhi.clf.entity.SurlEntity;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +18,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -28,6 +32,8 @@ public class B_AccessFilter implements Filter {
 	private SUrlDAO sUrlDAO;
 	@Autowired
 	private AdminDAO adminDAO;
+	
+	private Logger log = LoggerFactory.getLogger(B_AccessFilter.class);
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,6 +43,8 @@ public class B_AccessFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain filterChain) throws IOException, ServletException {
+		
+		
 		// 防止注入失败
 		if (sUrlDAO == null || adminDAO == null) {
 			sUrlDAO = WebApplicationContextUtils.getWebApplicationContext(
@@ -91,7 +99,9 @@ public class B_AccessFilter implements Filter {
 
 		}
 		session.setAttribute("shopMsg", surlEntity);
-		System.out.println("包邮" + surlEntity.getMinPrice());
+		//System.out.println("包邮" + surlEntity.getMinPrice());
+		log.debug("包邮" + surlEntity.getMinPrice());
+		
 		// 跳转到主页
 		// request.getRequestDispatcher("/chinaPage/page/booklist.jsp").forward(request,response);
 		filterChain.doFilter(request, response);

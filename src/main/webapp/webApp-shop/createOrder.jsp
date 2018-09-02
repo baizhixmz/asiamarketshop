@@ -226,15 +226,20 @@
     	var name1 = $("#name1").val();
     	var phone1 = $("#phone").val();
     	console.log(qtime);
-	    $.ajax({
-		    url: getHostName() + '/order/createOrder',
-		    type: 'POST',
-		    dataType: 'JSON',
-		    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
-		    success: function (data) {
-		    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
-		    }
-	    })
+    	
+    	if(qtime != "" && name1 != "" && phone1 != ""){
+		    $.ajax({
+			    url: getHostName() + '/order/createOrder',
+			    type: 'POST',
+			    dataType: 'JSON',
+			    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
+			    success: function (data) {
+			    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
+			    }
+		    });
+    	}else{
+    		alert("请将信息填写完整");
+    	}
     }
     
 </script>

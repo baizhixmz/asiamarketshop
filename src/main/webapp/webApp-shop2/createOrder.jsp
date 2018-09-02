@@ -214,15 +214,19 @@
     	var qtime = $("#test").text();
     	var name1 = $("#name1").val();
     	var phone1 = $("#phone").val();
-    	$.ajax({
-		    url: getHostName() + '/order/createOrder',
-		    type: 'POST',
-		    dataType: 'JSON',
-		    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
-		    success: function (data) {
-		    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
-		    }
-	    })
+    	if(qtime != "" && name1 != "" && phone1 != ""){
+	    	$.ajax({
+			    url: getHostName() + '/order/createOrder',
+			    type: 'POST',
+			    dataType: 'JSON',
+			    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
+			    success: function (data) {
+			    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
+			    }
+		    });
+    	}else{
+    		alert("Bitte füllen Sie die vollständigen Quittungsinformationen aus");
+    	}
     }
     
 </script>

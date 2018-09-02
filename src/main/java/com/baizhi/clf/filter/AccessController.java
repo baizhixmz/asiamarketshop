@@ -35,6 +35,7 @@ public class AccessController {
 		 * SurlEntity surlEntity =
 		 * sUrlDAO.selectSurlByAdminId("40289fcc6275dfc601627614a55e0019");
 		 * session.setAttribute("shopMsg",surlEntity);
+		 * 
 		 */
 
 		return "redirect:/netShoppp/toRecommendShop";

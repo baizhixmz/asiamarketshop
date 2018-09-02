@@ -15,6 +15,7 @@ $(function(){
     })
 
     $("#btnSure").on("touchend",function(){
+    	console.log("----------------------");
     	var goodsId = num.parent().parent(".option").attr("data-goodsId");
         $("#mask").hide();
         $(this).siblings('input').val("0");
@@ -27,7 +28,7 @@ $(function(){
 
 
     // 删除此商品
-    $("#cart-shop").on("touchend","#delGoods",function(){
+    $("#cart-shop").on("click","#delGoods",function(){
         //
     	var goodsId = $(this).parent().parent(".option").attr("data-goodsId");
         // 删除即可
