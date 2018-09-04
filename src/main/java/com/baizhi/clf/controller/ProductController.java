@@ -29,8 +29,7 @@ public class ProductController {
 		List<SproductEntity> products;
 
 		Page page = new Page(pageIndex);
-		products = productService.findProductsByCategoryId(adminId, categoryId,
-				page);
+		products = productService.findProductsByCategoryId(adminId, categoryId,page);
 
 		return products;
 	}
@@ -39,8 +38,7 @@ public class ProductController {
 	public List<SproductEntity> findProductsMain(String adminId,
 			String condition) {
 
-		List<SproductEntity> products = productService.findProductsMain(
-				adminId, condition);
+		List<SproductEntity> products = productService.findProductsMain(adminId, condition);
 
 		return products;
 

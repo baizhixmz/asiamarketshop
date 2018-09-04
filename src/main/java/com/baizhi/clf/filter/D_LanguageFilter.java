@@ -58,21 +58,15 @@ public class D_LanguageFilter implements Filter {
 		
 		log.debug(language);
 		
-		//System.out.println(language);
 		if (language.startsWith("zh")) {
 			// 跳转中文界面
-
 			if (userAgent.indexOf("Android") != -1 || userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") != -1) {
 				// 手机
-				System.out.println(admin.getId());
 				response2.sendRedirect(contextPath + "/webApp-shop/home.jsp?adminId=" + admin.getId());
-				
 				return;
 			} else { 
 				//电脑
-				
 				response2.sendRedirect(contextPath+"/prompt/prompt.jsp"); 
-				
 				return;
 			 }
 			
@@ -80,26 +74,12 @@ public class D_LanguageFilter implements Filter {
 			// 跳转德文界面
 			if (userAgent.indexOf("Android") != -1 || userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") !=-1) {
 				// 手机
-				/*if (admin.getUsername().equals("SuperAdmin")) {
-					response2.sendRedirect(contextPath + "/webApp-shop2/login.jsp");
-				} else {*/
-				
 				response2.sendRedirect(contextPath + "/webApp-shop2/home.jsp?adminId=" + admin.getId());
-				
-				/*}*/
-				
 				return;
-			
 			 } else { 
-				 //电脑
-				 /*if(admin.getUsername().equals("SuperAdmin")){
-					 response2.sendRedirect(contextPath+"/italyPage/page/login.jsp");
-				 }else{*/ 
-				 
-				 response2.sendRedirect(contextPath+"/prompt/prompt.jsp"); 
-				 
-				 /*}*/ 
-				 return;
+				//电脑
+				response2.sendRedirect(contextPath+"/prompt/prompt.jsp"); 
+				return;
 			 }
 		}
 	}
