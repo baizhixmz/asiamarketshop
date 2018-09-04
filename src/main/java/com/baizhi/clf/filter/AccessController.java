@@ -26,18 +26,7 @@ public class AccessController {
 	@RequestMapping("/")
 	public String toMain(HttpServletRequest request, HttpSession session) {
 		// 获取默认管理员 并跳转 admin 默认跳转wangyan店铺
-		/*
-		 * Admin admin =
-		 * adminDAO.selectAdminById("40289fcc6275dfc601627614a55e0019");
-		 * 
-		 * session.setAttribute("adminMsg",admin);
-		 * 
-		 * SurlEntity surlEntity =
-		 * sUrlDAO.selectSurlByAdminId("40289fcc6275dfc601627614a55e0019");
-		 * session.setAttribute("shopMsg",surlEntity);
-		 * 
-		 */
 
-		return "redirect:/netShoppp/toRecommendShop";
+		return "redirect:/asiamarket/toRecommendShop";
 	}
 }

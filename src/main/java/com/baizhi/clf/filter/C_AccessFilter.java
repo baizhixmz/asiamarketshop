@@ -49,12 +49,14 @@ public class C_AccessFilter implements Filter {
 
 		Admin adminMsg = (Admin) session.getAttribute("adminMsg");
 
+		System.out.println("C:"+adminMsg == null);
+		
 		// 所以要求url 传递必须携带amdinId
 		if (adminMsg == null) {
 
 			String adminId = request1.getParameter("adminId");
 			Admin admin = adminDAO.selectAdminById(adminId);
-
+			System.out.println(admin.getUsername());
 			SurlEntity surlEntity = sUrlDAO.selectSurlByAdminId(adminId);
 
 			session.setAttribute("adminMsg", admin);

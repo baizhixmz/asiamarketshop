@@ -23,7 +23,7 @@ import java.util.Locale;
 /**
  * 语言拦截器 判断浏览器的语言进行语言选择 并且判断访问方式是手机或者电脑
  */
-@WebFilter(urlPatterns = "/netShoppp/*", filterName = "f4")
+@WebFilter(urlPatterns = "/asiamarket/*", filterName = "f4")
 public class D_LanguageFilter implements Filter {
 	
 	private Logger log = LoggerFactory.getLogger(D_LanguageFilter.class);
@@ -64,19 +64,15 @@ public class D_LanguageFilter implements Filter {
 
 			if (userAgent.indexOf("Android") != -1 || userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") != -1) {
 				// 手机
-				/*if (admin.getUsername().equals("SuperAdmin")) {
-					response2.sendRedirect(contextPath + "/webApp-shop/login.jsp");
-				} else {*/
+				System.out.println(admin.getId());
 				response2.sendRedirect(contextPath + "/webApp-shop/home.jsp?adminId=" + admin.getId());
-				/*}*/
+				
 				return;
 			} else { 
 				//电脑
-				/*if(admin.getUsername().equals("SuperAdmin")){
-					response2.sendRedirect(contextPath+"/chinaPage/page/login.jsp");
-				}else{*/ 
+				
 				response2.sendRedirect(contextPath+"/prompt/prompt.jsp"); 
-				/*}*/
+				
 				return;
 			 }
 			

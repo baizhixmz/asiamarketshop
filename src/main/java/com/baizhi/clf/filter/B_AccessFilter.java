@@ -25,7 +25,7 @@ import java.io.IOException;
  * Created by Administrator on 2018/3/22.
  */
 // 在访问时通过访问的连接判断用户访问的是哪个店铺
-@WebFilter(urlPatterns = "/netShoppp/*", filterName = "f2")
+@WebFilter(urlPatterns = "/asiamarket/*", filterName = "f2")
 public class B_AccessFilter implements Filter {
 
 	@Autowired
@@ -63,8 +63,8 @@ public class B_AccessFilter implements Filter {
 		SurlEntity surlEntity = sUrlDAO.selectAdminIdByUrl(requestURL
 				.toString());
 		HttpSession session = request1.getSession();
-
-		if (surlEntity == null || surlEntity.getStatus().equals("N")) {
+		
+		if (surlEntity == null || surlEntity.getStatus().equals("未激活")) {
 			// 代表没有该店铺 或者店铺被关闭 跳转默认店铺
 			surlEntity = sUrlDAO
 					.selectSurlByCondition("where name2 = 'shop002'");
@@ -78,10 +78,10 @@ public class B_AccessFilter implements Filter {
 						.selectSurlByAdminId("40289fcc6275dfc601627614a55e0019");
 			} else {
 				admin = adminDAO.selectAdminById(surlEntity.getAdminId());
-				if (admin.getUsername().equals("SuperAdmin")) {
-					session.setAttribute("user", null);
-					session.setAttribute("shopMsg", surlEntity);
-				}
+				
+				session.setAttribute("user", null);
+				session.setAttribute("shopMsg", surlEntity);
+			
 			}
 
 			session.setAttribute("adminMsg", admin);
@@ -89,23 +89,19 @@ public class B_AccessFilter implements Filter {
 
 			// 获取当前访问的店主信息
 			Admin admin = adminDAO.selectAdminById(surlEntity.getAdminId());
-
+			
+			System.out.println(admin.getUsername());
+			
 			session.setAttribute("adminMsg", admin);
 
-			if (admin.getUsername().equals("SuperAdmin")) {
-				session.setAttribute("user", null);
-				session.setAttribute("shopMsg", surlEntity);
-			}
+			session.setAttribute("user", null);
+			session.setAttribute("shopMsg", surlEntity);
 
 		}
-		session.setAttribute("shopMsg", surlEntity);
-		//System.out.println("包邮" + surlEntity.getMinPrice());
 		log.debug("包邮" + surlEntity.getMinPrice());
 		
 		// 跳转到主页
-		// request.getRequestDispatcher("/chinaPage/page/booklist.jsp").forward(request,response);
 		filterChain.doFilter(request, response);
-
 	}
 
 	@Override

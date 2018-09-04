@@ -48,15 +48,6 @@ public class A_LoginFilter implements Filter {
 
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-		/*
-		 * Cookie[] cookies = request.getCookies(); if (null==cookies) {
-		 * System.out.println("没有cookie=============="); } else { for(Cookie
-		 * cookie : cookies){ if(cookie.getName().equals("userId")){
-		 * cookie.setValue(null); cookie.setMaxAge(0);// 立即销毁cookie
-		 * cookie.setPath("/");
-		 * System.out.println("被删除的cookie名字为:"+cookie.getName());
-		 * response.addCookie(cookie); break; } } }
-		 */
 
 		HttpSession session = request.getSession();
 

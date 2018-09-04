@@ -46,7 +46,52 @@
 			cursor: pointer;
 			background-repeat: no-repeat;
 		}
+		
+		.pad_right {
+				padding-right: 2em;
+			}
+			
+			#scroll_div {
+				height: 26px;
+				overflow-y: hidden;
+				white-space: nowrap;
+				width: 270px;
+				
+				/* margin-left: 10px; */
+			}
+			
+			#scroll_begin,#scroll_end {
+				width: 270px;
+				display: inline;
+			}
 	</style>
+	<script>
+			function ScrollImgLeft(){ 
+				var speed=50;
+				var MyMar = null;
+				var scroll_begin = document.getElementById("scroll_begin"); 
+				var scroll_end = document.getElementById("scroll_end"); 
+				var scroll_div = document.getElementById("scroll_div"); 
+				scroll_end.innerHTML=scroll_begin.innerHTML; 
+				function Marquee(){ 
+					if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0) 
+						scroll_div.scrollLeft-=scroll_begin.offsetWidth; 
+					else
+						scroll_div.scrollLeft++; 
+				} 
+				MyMar=setInterval(Marquee,speed); 
+				scroll_div.onmouseover = function(){
+					clearInterval(MyMar);
+				}
+				scroll_div.onmouseout = function(){
+					MyMar = setInterval(Marquee,speed); 　　　　
+				}  
+			}
+					
+			$(function(){		 
+				ScrollImgLeft();
+			})
+		</script>
 </head>
 <body>
 	<!-- 头部 -->
@@ -61,7 +106,8 @@
 			function toChinaPage(){
 				location.href = getHostName()+"/webApp-shop/home.jsp";
 			}
-		</script></header>
+		</script>
+	</header>
     <div class="categary">
     	<div class="searchTop">
     		<div class="iptSearch">
@@ -80,6 +126,20 @@
             </ul>
         </div>
         <div class="categary-right">
+        
+        	<div id="scroll_div" class="fl">
+					<div id="scroll_begin" >
+						<font size="2" color="red">
+							这个网站为了更好的为你服务使用了cookie，您可以把它关闭，但是网站的功能会受到影响 <span
+							class="pad_right"> </span> "This website uses cookies to ensure
+							you get the best experience on our website，you can disable it but
+							the website will not function properly"
+						</font>
+	
+					</div>
+					<div id="scroll_end"></div>
+				</div>
+        	
             <div class="right-in">
 				<ul id="product-info" class="product-info">
 <!-- 					<li>
