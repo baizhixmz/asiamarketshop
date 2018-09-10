@@ -25,8 +25,8 @@ $(function(){
 							var totalNum = 0;
 									var orderListheaderStr = `<div class="orderDetail">
 											<div class="orderListHeader">
-									        	<div class="orderNumber" >Numero dell'ordine:${ele.sorderEntity.orderNum}</div>
-									        	<div class="orderStatus">Stato dell'ordine:<span style="color:#d8505c ">${ele.sorderEntity.orderStatus}</span></div>
+									        	<div class="orderNumber" >Numero:${ele.sorderEntity.orderNum}</div>
+									        	<div class="orderStatus">Stato: <span style="color:#d8505c ">${ele.sorderEntity.orderStatus}</span></div>
 									        </div>
 										</div>`;
 								$("#cart-shop").append(orderListheaderStr);
@@ -38,7 +38,7 @@ $(function(){
 									var orderListContentrStr = `<div class="item"><div class="cart-shop-content">
 											            <div class="cart-shop-content-right">
 											                <a href="#" class="product-img">
-											                    <img src="http://lu-food.com/net_shop_manager/${GoodsEle.sproductEntity.imgsrc}" alt=""/>
+											                    <img src="http://mainriversoft.com/asiamarketmanager/${GoodsEle.sproductEntity.imgsrc}" alt=""/>
 											                </a>
 											                <div class="product-info">
 											                    <a href="#" class="info-txt"></a>
@@ -55,8 +55,33 @@ $(function(){
 									$(".orderListHeader").last().after(orderListContentrStr);
 								});
 
+								var r;
+								$.ajax({
+												url: getHostName()+'/order/findOrderType',
+												type: 'POST',
+												dataType: 'JSON',
+												async: false,
+												data:{orderNum:ele.sorderEntity.orderNum},
+												success:function(result){
+													console.log(JSON.parse(result).qtime);
+													r = JSON.parse(result).qtime;
+												}
+											});
+								console.log(r == null);
+								
+								var type = "";
+								
+								if(r == null){
+									type = "Mailing";
+								}else{
+									type = "Abholung";
+								}
+								
+								
 								var orderListFooterStr = `<div class="orderListFooter">
-												        	<div>Totale<span class="totalNum">${totalNum}</span>prodotti totale： <span class="totalPrice" style="color:#d8505c">€ ${ele.sorderEntity.orderSalary}</span></div>
+															<div>Lieferart：${type}</div>
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												        	<div>Totale<span class="totalNum"> ${totalNum} </span>prodotti totale： <span class="totalPrice" style="color:#d8505c">€ ${ele.sorderEntity.orderSalary}</span></div>
 												        </div>`;
 
 					        	$(".item .cart-shop-content").last().after(orderListFooterStr);

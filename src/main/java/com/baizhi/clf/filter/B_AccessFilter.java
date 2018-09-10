@@ -2,6 +2,7 @@ package com.baizhi.clf.filter;
 
 import com.baizhi.clf.dao.AdminDAO;
 import com.baizhi.clf.dao.SUrlDAO;
+import com.baizhi.clf.dao.UserDAO;
 import com.baizhi.clf.entity.Admin;
 import com.baizhi.clf.entity.SurlEntity;
 
@@ -9,7 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -25,9 +28,11 @@ import java.io.IOException;
  * Created by Administrator on 2018/3/22.
  */
 // 在访问时通过访问的连接判断用户访问的是哪个店铺
-@WebFilter(urlPatterns = "/asiamarket/*", filterName = "f2")
+//@WebFilter(urlPatterns = "/asiamarket/*", filterName = "f2")
 public class B_AccessFilter implements Filter {
 
+	private ServletContext servletContext;
+	
 	@Autowired
 	private SUrlDAO sUrlDAO;
 	@Autowired
@@ -37,13 +42,12 @@ public class B_AccessFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-
+		servletContext = filterConfig.getServletContext();
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain filterChain) throws IOException, ServletException {
-		
 		
 		// 防止注入失败
 		if (sUrlDAO == null || adminDAO == null) {
@@ -58,16 +62,14 @@ public class B_AccessFilter implements Filter {
 
 		// 获取访问的url http://localhost/shoppp/sdfasf
 		StringBuffer requestURL = request1.getRequestURL();
-		System.out.println("===========s==" + requestURL.toString()
-				+ "========");
-		SurlEntity surlEntity = sUrlDAO.selectAdminIdByUrl(requestURL
-				.toString());
+		log.debug("===========s==" + requestURL.toString() + "========");
+		SurlEntity surlEntity = sUrlDAO.selectAdminIdByUrl(requestURL.toString());
 		HttpSession session = request1.getSession();
 		
 		if (surlEntity == null || surlEntity.getStatus().equals("未激活")) {
 			// 代表没有该店铺 或者店铺被关闭 跳转默认店铺
 			surlEntity = sUrlDAO
-					.selectSurlByCondition("where name2 = 'shop002'");
+					.selectSurlByCondition("where name2 = 'Einkaufen001'");
 
 			Admin admin = null;
 			if (surlEntity == null) {
@@ -90,7 +92,7 @@ public class B_AccessFilter implements Filter {
 			// 获取当前访问的店主信息
 			Admin admin = adminDAO.selectAdminById(surlEntity.getAdminId());
 			
-			System.out.println(admin.getUsername());
+			log.debug(admin.getUsername());
 			
 			session.setAttribute("adminMsg", admin);
 
@@ -99,7 +101,6 @@ public class B_AccessFilter implements Filter {
 
 		}
 		log.debug("包邮" + surlEntity.getMinPrice());
-		
 		// 跳转到主页
 		filterChain.doFilter(request, response);
 	}

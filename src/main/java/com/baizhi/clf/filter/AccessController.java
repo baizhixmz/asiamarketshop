@@ -27,6 +27,6 @@ public class AccessController {
 	public String toMain(HttpServletRequest request, HttpSession session) {
 		// 获取默认管理员 并跳转 admin 默认跳转wangyan店铺
 
-		return "redirect:/asiamarket/toRecommendShop";
+		return "redirect:/toShop/toRecommendShop";
 	}
 }

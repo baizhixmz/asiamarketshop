@@ -4,7 +4,12 @@ import com.baizhi.clf.dao.AdminDAO;
 import com.baizhi.clf.dao.SUrlDAO;
 import com.baizhi.clf.entity.Admin;
 import com.baizhi.clf.entity.SurlEntity;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -13,15 +18,18 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
  * Created by Administrator on 2018/3/22.
  */
 // 如果店铺管理员信息没有存储进行存储
-@WebFilter(urlPatterns = "*.jsp", filterName = "f3")
+//@WebFilter(urlPatterns = "*.jsp", filterName = "f3")
 public class C_AccessFilter implements Filter {
 
+	private ServletContext servletContext;
+	private Logger log = LoggerFactory.getLogger(C_AccessFilter.class);
 	@Autowired
 	private AdminDAO adminDAO;
 	@Autowired
@@ -29,7 +37,8 @@ public class C_AccessFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-
+		servletContext = filterConfig.getServletContext();
+		
 	}
 
 	@Override
@@ -49,14 +58,14 @@ public class C_AccessFilter implements Filter {
 
 		Admin adminMsg = (Admin) session.getAttribute("adminMsg");
 
-		System.out.println("C:"+adminMsg == null);
-		
 		// 所以要求url 传递必须携带amdinId
 		if (adminMsg == null) {
 
 			String adminId = request1.getParameter("adminId");
 			Admin admin = adminDAO.selectAdminById(adminId);
-			System.out.println(admin.getUsername());
+			
+			log.debug(admin.getUsername());
+			
 			SurlEntity surlEntity = sUrlDAO.selectSurlByAdminId(adminId);
 
 			session.setAttribute("adminMsg", admin);

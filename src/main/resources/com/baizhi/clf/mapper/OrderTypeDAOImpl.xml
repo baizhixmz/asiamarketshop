@@ -3,9 +3,9 @@
 <mapper namespace="com.baizhi.clf.dao.SorderTypeDAO">
 
     <select id="selectByOrderNum" parameterType="String" resultType="com.baizhi.clf.entity.SorderTypeEntity">
-        select id,orderNum,name,phone,address,qtime
+        select id,order_num,name,phone,address,qtime
         from s_order_type
-        where orderNum = #{orderNum}
+        where order_num = #{orderNum}
     </select>
     
     <insert id="insert">
@@ -15,7 +15,7 @@
     </insert>
     
     <delete id="delete" parameterType="String">
-    	delete from s_order_type where orderNum = #{orderNum}
+    	delete from s_order_type where order_num = #{orderNum}
     </delete>
     
 

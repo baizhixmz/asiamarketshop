@@ -3,9 +3,12 @@ package com.baizhi.clf.service;
 import com.baizhi.clf.dao.OrderDAO;
 import com.baizhi.clf.dao.ProductDAO;
 import com.baizhi.clf.entity.*;
+import com.baizhi.clf.filter.B_AccessFilter;
 import com.baizhi.clf.util.OrderNumUtil;
 import com.baizhi.clf.vo.CartCarVO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -28,6 +31,9 @@ import java.util.*;
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 public class OrderServiceImpl implements OrderService {
 
+	
+	private Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
+	
 	@Autowired
 	private OrderDAO orderDAO;
 	@Autowired
@@ -42,8 +48,7 @@ public class OrderServiceImpl implements OrderService {
 
 		HttpSession session = request.getSession();
 
-		SuserEntity suserEntity = (SuserEntity) session.getAttribute("user");
-
+		SuserEntity suserEntity = (SuserEntity) session.getAttribute("user");		
 		// 获取当前店主信息
 		Admin admin = (Admin) session.getAttribute("adminMsg");
 
@@ -105,14 +110,14 @@ public class OrderServiceImpl implements OrderService {
 		// 获取当前店主信息
 		Admin admin = (Admin) session.getAttribute("adminMsg");
 
-		System.out.println("sessionAdmin:" + admin);
+		log.debug("sessionAdmin:" + admin);
 
 		SorderEntity sorderEntity = new SorderEntity();
 		sorderEntity.setAdminId(admin.getId());
 
 		SuserEntity user = (SuserEntity) session.getAttribute("user");
 
-		System.out.println("sessionUser:" + user);
+		log.debug("sessionUser:" + user);
 
 		sorderEntity.setUserId(user.getId());
 		// 通过 外键和 店主id 获取用户在当前店铺的订单数据
@@ -121,7 +126,7 @@ public class OrderServiceImpl implements OrderService {
 		// 构建订单页数据
 		for (SorderEntity entity : sorderEntities) {
 
-			System.out.println(entity);
+			log.debug(entity.toString());
 
 			// 通过订单获取用户的订单项数据
 			HashMap<SorderEntity, List<CartCarVO>> map = new HashMap<SorderEntity, List<CartCarVO>>();

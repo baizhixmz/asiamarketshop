@@ -104,6 +104,8 @@
 					  console.log(data);
 					  $("#name").attr("value",data.name);
 					  $("#phone").attr("value",data.phone);
+					  $("#name1").attr("value",data.name);
+					  $("#phone1").attr("value",data.phone);
 					  $("#address").attr("value",data.address);
 				  },
 				  dataType: "json"
@@ -202,7 +204,6 @@
 	            }
 	        })
     	}else{
-    		console.log("----------请填写完整的收货信息------------");
     		alert("Bitte füllen Sie die vollständigen Quittungsinformationen aus");
     	}
         
@@ -214,7 +215,7 @@
     	var qtime = $("#test").text();
     	var name1 = $("#name1").val();
     	var phone1 = $("#phone").val();
-    	if(qtime != "" && name1 != "" && phone1 != ""){
+    	if(qtime != "" && name1 != "" && phone1 != "" && qtime != "Wählen Sie Abholzeit"){
 	    	$.ajax({
 			    url: getHostName() + '/order/createOrder',
 			    type: 'POST',

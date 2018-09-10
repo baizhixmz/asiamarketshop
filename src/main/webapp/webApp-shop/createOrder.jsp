@@ -74,6 +74,7 @@
 			 element.on('tab(demo)', function(data){
 			    console.log(data);
 			 });
+			 
 			  
 			 element.on('tab(docDemoTabBrief)', function(data){
 				  var str1 = `<a href="#" onclick="createOrder1()">创建订单</a>`;
@@ -113,12 +114,18 @@
 					  //console.log(data);
 					  $("#name").attr("value",data.name);
 					  $("#phone").attr("value",data.phone);
+					  $("#name1").attr("value",data.name);
+					  $("#phone1").attr("value",data.phone);
 					  $("#address").attr("value",data.address);
 				  },
 				  dataType: "json"
 			});
 			
 		});
+		
+		function checkMobiles(theForm) {
+		    return /^((13|15|18|14|17)+\d{9})$/.test(theForm);
+		}
 		
 	</script>
 </head>
@@ -131,14 +138,6 @@
 </header>
 
 <div id="cart-shop" style="margin-top:50px;" >
-	<!-- <div style="width: 100%;">
-		<div style="float: right;width: 50%;background-color: lime;">
-			<button class="layui-btn layui-btn-fluid layui-btn-primary">邮寄</button>
-		</div>
-		<div style="width: 50%;background-color: red;">
-			<button class="layui-btn layui-btn-fluid layui-btn-primary">上门取货</button>
-		</div>
-	</div> -->
 	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief"> 
 		<ul class="layui-tab-title">
 		<li class="layui-this">上门取货</li>
@@ -148,7 +147,7 @@
 			<div class="layui-tab-item layui-show">
 				<ul>
 					<li>&nbsp;&nbsp;&nbsp;姓名：<input type="text" id="name1" name="name1"/></li>
-					<li>手机号：<input type="text" id="phone1" name="phone1"/></li>
+					<li>手机号：<input type="text" id="phone1" name="phone1"/><span id="tt"></span></li>
 					<li class='test' id='test'>选择取货时间</li>
 				</ul>
 				
@@ -175,7 +174,10 @@
 						</tr>
 						<tr>
 							<td>联系电话：</td>
-							<td><input type="text" id="phone"/></td>
+							<td>
+								<input type="text" id="phone"/>
+								
+							</td>
 						</tr>
 						<tr>
 							<td>详细地址：</td>
@@ -199,22 +201,23 @@
     	var phone = $("#phone").val();
     	var address = $("#address").val();
     	
-    	if(temp == 1 && name!="" && phone!="" && address!=""){
-	        console.log("----------createOrder------------");
-    		var totalPrice = $("#btnPrice").text().substring(2);
-	        $.ajax({
-	            url: getHostName() + '/order/createOrder',
-	            type: 'POST',
-	            dataType: 'JSON',
-	            data: {salary: totalPrice,name:name,phone:phone,address:address},
-	            success: function (data) {
-	            	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
-	            }
-	        })
-    	}else{
-    		console.log("----------请填写完整的收货信息------------");
-    		alert("请填写完整的收货信息");
-    	}
+    	var f = checkMobiles(phone);
+		
+    	    	
+	    	if(temp == 1 && name!="" && phone!="" && address!=""){
+	    		var totalPrice = $("#btnPrice").text().substring(2);
+		        $.ajax({
+		            url: getHostName() + '/order/createOrder',
+		            type: 'POST',
+		            dataType: 'JSON',
+		            data: {salary: totalPrice,name:name,phone:phone,address:address},
+		            success: function (data) {
+		            	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
+		            }
+		        })
+	    	}else{
+	    		alert("请填写完整的收货信息");
+	    	}
         
     }
     
@@ -224,22 +227,23 @@
     	
     	var qtime = $("#test").text();
     	var name1 = $("#name1").val();
-    	var phone1 = $("#phone").val();
-    	console.log(qtime);
+    	var phone1 = $("#phone1").val();
     	
-    	if(qtime != "" && name1 != "" && phone1 != ""){
-		    $.ajax({
-			    url: getHostName() + '/order/createOrder',
-			    type: 'POST',
-			    dataType: 'JSON',
-			    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
-			    success: function (data) {
-			    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
-			    }
-		    });
-    	}else{
-    		alert("请将信息填写完整");
-    	}
+    	var f = checkMobiles(phone);     
+	    	if(qtime != "" && name1 != "" && phone1 != "" && qtime != "选择取货时间"){
+			    $.ajax({
+				    url: getHostName() + '/order/createOrder',
+				    type: 'POST',
+				    dataType: 'JSON',
+				    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
+				    success: function (data) {
+				    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
+				    }
+			    });
+	    	}else{
+	    		alert("请将信息填写完整");
+	    	}
+    	
     }
     
 </script>

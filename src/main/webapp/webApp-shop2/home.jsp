@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>Lu-Food</title>
+	<title>Asiamarket</title>
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/iconfont.css">
 	<link rel="stylesheet" href="css/header.css">
@@ -142,25 +142,7 @@
         	
             <div class="right-in">
 				<ul id="product-info" class="product-info">
-<!-- 					<li>
-						<div class="left-img">
-							<a href="#">
-								<img src="images/01.jpg" alt="">
-							</a>
-						</div>
-						<div class="middle-info">
-							<div class="product-name">菲律宾帝皇蕉菲律宾帝皇蕉菲律
-							</div>
-							<div class="product-price">
-								€2.50/kg
-							</div>
-						</div>
-						<div class="right-num">
-							<span id="minusOne" class="iconfont  icon-jian minusOne"></span>
-							<span id="num" class="num"> 0 </span>
-							<span id="addOne" class="iconfont  icon-jia addOne"></span>
-						</div>
-					</li> -->
+
 				</ul>
             </div>
         </div>
@@ -173,22 +155,7 @@
     			<span class="iconfont icon-cart"></span>
 	    	</div>
 	    	<ul id="maxShoppingList">
-<!-- 	    		<li>
-	    			<div class="shopInfo">
-		    			<div class="shopName">2153中国芹菜 China Celery</div>
-		    			<div class="shopPrice">€3</div>
-		    			<div class="shopNum">4kg</div>
-	    			</div>
-	    			<div class="btnDel">
-	    				<span class="btnClear iconfont icon-cart"></span>
-	    				<span class="btnAdd iconfont icon-cart"></span>
-	    				<span class="btnMinus iconfont icon-cart"></span>
-	    			</div>
-	    		</li> -->
 
-<!-- 	    		<div id="btnClear" class="clear">
-	    			<span class="iconfont icon-cart"></span>清空购物车
-	    		</div> -->
 	    	</ul>
     	</div>
     </div>
@@ -234,7 +201,7 @@
 					<span>Einkaufswagen</span>
 				</li>
 			</a>
-			<a href="mine.jsp">
+			<a href="orderList.jsp">
 				<li>
 					<i class="iconfont icon-account"></i>
 					<span>Meine Bestellung</span>

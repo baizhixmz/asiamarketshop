@@ -42,13 +42,11 @@ public class OrderController {
 
 		HttpSession session = request.getSession();
 
-		if (name != null && phone != null && address != null) {
-			SuserEntity user = (SuserEntity) session.getAttribute("user");
-			user.setName(name);
-			user.setPhone(phone);
-			user.setAddress(address);
-			userService.update(user);
-		}
+		SuserEntity user = (SuserEntity) session.getAttribute("user");
+		user.setName(name);
+		user.setPhone(phone);
+		user.setAddress(address);
+		userService.update(user);
 
 		String result = orderService.createOrder(salary);
 
@@ -89,5 +87,13 @@ public class OrderController {
 		}
 
 		return dtoArrayList;
+	}
+
+	@RequestMapping("/findOrderType")
+	public SorderTypeEntity findOrderType(String orderNum) {
+		System.out.println(orderNum);
+		SorderTypeEntity orderType = orderTypeService.findByOrderNum(orderNum);
+		System.out.println(orderType);
+		return orderType;
 	}
 }

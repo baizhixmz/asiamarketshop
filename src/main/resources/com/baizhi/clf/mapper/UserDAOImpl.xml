@@ -16,7 +16,11 @@
     
     <update id="updateUser" parameterType="com.baizhi.clf.entity.SuserEntity">
     	
-    	update s_user set phone = #{phone},address = #{address},name = #{name} where id = #{id}
+    	update s_user set phone = #{phone},
+    	<if test="address != null">
+	    	address = #{address},
+    	</if>
+    	name = #{name} where id = #{id}
     	
     </update>
     

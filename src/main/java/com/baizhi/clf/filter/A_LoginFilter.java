@@ -5,6 +5,7 @@ import com.baizhi.clf.entity.SuserEntity;
 import com.baizhi.clf.util.CookiesUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
@@ -24,18 +25,22 @@ import java.util.UUID;
 /**
  * Created by Administrator on 2018/3/1.
  */
-@WebFilter(urlPatterns = "/*", filterName = "f0")
+//@WebFilter(urlPatterns = "/as*", filterName = "f0")
 public class A_LoginFilter implements Filter {
 	private ServletContext servletContext;
 
+	
+	private UserDAO userDAO;
+	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 
 		servletContext = filterConfig.getServletContext();
+	    ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+	    userDAO = (UserDAO) ctx.getBean("userDAO");
+		
 	}
 
-	@Autowired
-	private UserDAO userDAO;
 
 	@Override
 	public void doFilter(ServletRequest servletRequest,
@@ -52,7 +57,6 @@ public class A_LoginFilter implements Filter {
 		HttpSession session = request.getSession();
 
 		if (cookie == null) {
-			System.out.println("-----------创建Cookie----------");
 			String cookName = UUID.randomUUID().toString();
 			CookiesUtil.setCookie(response, "userId", cookName, 1000 * 60 * 60
 					* 24 * 365);
@@ -66,12 +70,6 @@ public class A_LoginFilter implements Filter {
 			session.setAttribute("user", suser);
 
 		}
-
-		/*
-		 * System.out.println(cookie);
-		 * 
-		 * System.out.println("cookie:"+cookie.getValue());
-		 */
 
 		// 代表用户已经登录直接放行
 		filterChain.doFilter(servletRequest, servletResponse);

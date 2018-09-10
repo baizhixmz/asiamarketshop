@@ -165,14 +165,14 @@ loadRemoteData = function(adminId,adminName) {
                     var str = `<li data-goodsId=${el.id}>
                                     <div class="left-img">
                                         <a href="#">
-                                            <img src="http://localhost:8080/net_shop_manager/${el.imgsrc}" alt="">
+                                            <img src="http://mainriversoft.com/asiamarketmanager/${el.imgsrc}" alt="">
                                         </a>
                                     </div>
                                     <div class="middle-info">
-                                        <div class="product-name">${el.name}
-                                        </div>
+                                        <div class="product-name">${el.name}</div>
+                                        <div class="product-name">单位：${el.chinaUnit}</div>
                                         <div class="product-price">
-                                            €${el.price}
+                                            价格：€${el.price}
                                         </div>
                                     </div>
                                     <div class="right-num">
@@ -204,14 +204,15 @@ loadRemoteData = function(adminId,adminName) {
                     var str = `<li data-goodsId=${el.id}>
                                     <div class="left-img">
                                         <a href="#">
-                                            <img src=http://lu-food.com/net_shop_manager/${el.imgsrc} alt="">
+                                            <img src="http://mainriversoft.com/asiamarketmanager/${el.imgsrc}" alt="">
                                         </a>
                                     </div>
                                     <div class="middle-info">
                                         <div class="product-name">${el.name}
                                         </div>
+                                        <div class="product-name">单位：${el.chinaUnit}</div>
                                         <div class="product-price">
-                                            €${el.price}
+                                            价格：€${el.price}
                                         </div>
                                     </div>
                                     <div class="right-num">
@@ -346,14 +347,15 @@ loadRemoteData = function(adminId,adminName) {
                         var str = `<li data-goodsId=${el.id}>
                                         <div class="left-img">
                                             <a href="#">
-                                                <img src=${getHostName2()}/net_shop_manager/${el.imgsrc} alt="">
+                                                <img src="http://mainriversoft.com/asiamarketmanager/${el.imgsrc} alt="">
                                             </a>
                                         </div>
                                         <div class="middle-info">
                                             <div class="product-name">${el.name}
                                             </div>
+                                            <div class="product-name">单位：${el.chinaUnit}</div>
                                             <div class="product-price">
-                                                €${el.price}
+                                                价格：€${el.price}
                                             </div>
                                         </div>
                                         <div class="right-num">

@@ -4,8 +4,11 @@ import com.baizhi.clf.dao.AdminDAO;
 import com.baizhi.clf.dao.UserDAO;
 import com.baizhi.clf.entity.Admin;
 import com.baizhi.clf.entity.SuserEntity;
+import com.baizhi.clf.filter.B_AccessFilter;
 import com.baizhi.clf.util.PasswordUtil;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -25,6 +28,9 @@ import java.util.UUID;
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 public class UserServiceImpl implements UserService {
 
+	
+	private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+	
 	@Autowired
 	private UserDAO userDAO;
 
@@ -54,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public SuserEntity findByCookid(String cookieId) {
-		System.out.println(cookieId);
+		log.debug(cookieId);
 		SuserEntity user = userDAO.selectUserByUsername(cookieId);
 		return user;
 	}

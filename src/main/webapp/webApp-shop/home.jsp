@@ -68,6 +68,7 @@
 				display: inline;
 			}
 		</style>
+		
 		<script>
 			function ScrollImgLeft(){ 
 				var speed=50;
@@ -90,9 +91,32 @@
 					MyMar = setInterval(Marquee,speed); 　　　　
 				}  
 			}
+			
+			function IsPC() {
+				var flag = true;
+				var sUserAgent = navigator.userAgent.toLowerCase();
+			    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+			    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+			    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+			    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+			    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+			    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+			    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+			    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+			    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+			        //跳转移动端页面
+			        flag = false;
+			    } else {
+			        //跳转pc端页面
+			    	flag = true;
+			    }
+				return flag;
+			}
 					
-			$(function(){		 
+			$(function(){
+				
 				ScrollImgLeft();
+				
 			})
 		</script>
 	</head>
@@ -113,14 +137,7 @@
 					location.href = getHostName()+"/webApp-shop2/home.jsp";
 				}
 			</script>
-			<!-- <div id="scroll_div" class="fl">
-				<div id="scroll_begin" >
-					<font size="2" color="red">
-						这个网站为了更好的为你服务使用了cookie，您可以把它关闭，但是网站的功能会受到影响 <span class="pad_right"> </span> "This website uses cookies to ensure you get the best experience on our website，you can disable it but the website will not function properly"
-					</font>
-				</div>
-				<div id="scroll_end"></div>
-			</div> -->
+			
 		</header>
 		<!-- <div style="float: left">--------------------</div> -->
 		<div class="categary">
@@ -132,14 +149,7 @@
 			</div>
 			<div id="categary-left" class="categary-left">
 				<ul>
-					<!--
-					<li class=""><a href="javascript:;">热门推荐</a></li>
-	                <li class="active"><a href="javascript:;">潮流女装</a></li>
-	                <li class=""><a href="javascript:;">品牌男装</a></li>
-	                <li class=""><a href="javascript:;">内衣配饰</a></li>
-	                <li class=""><a href="javascript:;">家用电器</a></li>
-	                <li class=""><a href="javascript:;">电脑办公</a></li>
-	            -->
+					
 				</ul>
 			</div>
 			<div class="categary-right">
@@ -157,25 +167,7 @@
 				</div>
 				<div class="right-in">
 					<ul id="product-info" class="product-info">
-						<!-- <li>
-							<div class="left-img">
-								<a href="#">
-									<img src="images/01.jpg" alt="">
-								</a>
-							</div>
-							<div class="middle-info">
-								<div class="product-name">菲律宾帝皇蕉菲律宾帝皇蕉菲律
-								</div>
-								<div class="product-price">
-									€2.50/kg
-								</div>
-							</div>
-							<div class="right-num">
-								<span id="minusOne" class="iconfont  icon-jian minusOne"></span>
-								<span id="num" class="num"> 0 </span>
-								<span id="addOne" class="iconfont  icon-jia addOne"></span>
-							</div>
-						</li> -->
+						
 					</ul>
 				</div>
 			</div>
@@ -188,22 +180,7 @@
 					<span class="iconfont icon-cart"></span>
 				</div>
 				<ul id="maxShoppingList">
-					<!-- 	    		<li>
-		    			<div class="shopInfo">
-			    			<div class="shopName">2153中国芹菜 China Celery</div>
-			    			<div class="shopPrice">€3</div>
-			    			<div class="shopNum">4kg</div>
-		    			</div>
-		    			<div class="btnDel">
-		    				<span class="btnClear iconfont icon-cart"></span>
-		    				<span class="btnAdd iconfont icon-cart"></span>
-		    				<span class="btnMinus iconfont icon-cart"></span>
-		    			</div>
-		    		</li> -->
-	
-					<!-- 	    		<div id="btnClear" class="clear">
-		    			<span class="iconfont icon-cart"></span>清空购物车
-		    		</div> -->
+					
 				</ul>
 			</div>
 		</div>

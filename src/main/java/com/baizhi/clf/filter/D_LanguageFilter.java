@@ -23,7 +23,7 @@ import java.util.Locale;
 /**
  * 语言拦截器 判断浏览器的语言进行语言选择 并且判断访问方式是手机或者电脑
  */
-@WebFilter(urlPatterns = "/asiamarket/*", filterName = "f4")
+//@WebFilter(urlPatterns = "/asiamarket/*", filterName = "f4")
 public class D_LanguageFilter implements Filter {
 	
 	private Logger log = LoggerFactory.getLogger(D_LanguageFilter.class);

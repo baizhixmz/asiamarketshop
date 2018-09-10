@@ -35,6 +35,7 @@ $(function(){
     	delGoods(goodsId);
         // 获取购物车列表
     	getShoppingCarList();
+    	
     })
 
 
@@ -67,7 +68,7 @@ $(function(){
 							                	<table style="width:100%;">
 							                		<tr>
 							                			<td style="width:70%;"><a href="#" class="info-txt">${el.sproductEntity.name}</a></td>
-							                			<td style="width:30%;"><font color="red">€${el.sproductEntity.price}</font></td>
+							                			<td style="width:30%;"><font color="red">€${el.sproductEntity.price} x ${el.count}</font></td>
 							                		</tr>
 							                    </table>
 							                 </div>
@@ -75,7 +76,6 @@ $(function(){
 							        </div>`;
 	                    $("#order_context").append(str);
                         $("#createList").css("display","flex");
-                        //$("#btnPrice").html("€ "+totalPrice.toFixed(2)); 
                         $("#o_price").text(totalPrice.toFixed(2));
                         	
 	                });
