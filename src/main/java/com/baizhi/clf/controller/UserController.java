@@ -36,9 +36,17 @@ public class UserController {
 
 		SuserEntity suserEntity = userService.findByCookid(cookieId);
 
+		if(suserEntity != null){
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("user", suserEntity);
+			
+		}
 		return suserEntity;
 
 	}
+
 
 	@RequestMapping("/getUser")
 	public String getUser(String cookieId, HttpServletRequest request) {

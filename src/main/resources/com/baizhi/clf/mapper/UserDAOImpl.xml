@@ -8,7 +8,7 @@
         where cookieid = #{cookieid}
     </select>
     
-    <insert id="insertUser">
+    <insert id="insertUser" >
         INSERT INTO s_user
         (id,cookieid,phone,address,name)
         values(#{id},#{cookieid},#{phone},#{address},#{name})

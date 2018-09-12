@@ -136,11 +136,8 @@ loadRemoteData = function(adminId,adminName) {
             dataType: 'JSON',
             success: function (data) {
                 $.each(JSON.parse(data), function (index, obj) {
-                	
-                    console.log(index, obj);
-                    
+                	                    
                     var arr = obj.name.split("/");
-                    console.log(arr[0]+"========"+arr[1]);
                     
                     if (index === 0) {
                         $("#categary-left ul").append($('<li id="search"><span class="iconfont  icon-search"></span></li><li id="allCate" class="active"><a href="javascript:void(0)">所有分类</a></li><li data-cateId=' + obj.id + '><a href="javascript:void(0)">' + arr[0] + '</a></li>'));

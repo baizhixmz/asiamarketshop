@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="css/footer.css">
 		<link rel="stylesheet" href="css/cate.css">
 		<script src="js/lib/zepto.min.js"></script>
+		<script src="js/fingerprint.js"></script>
 		<script src="js/cate.js"></script>
 		<style>
 			.addOne {
@@ -117,14 +118,95 @@
 				
 				ScrollImgLeft();
 				
+				//获取浏览器的唯一标识
+				var fingerprint = new Fingerprint().get(); 
+				
+				console.log("fingerprint:"+fingerprint);
+				getUser(fingerprint);
+				
 			})
 			
 			
-			function getUser(){
+			function getUser(fingerprint){
+				
+				var cookie = getCookie("userId");
+				console.log("cookie:"+cookie);
+				if(cookie == ""){
+					$.ajax({
+						url: getHostName()+"/user/findOneById",
+			            type: 'POST',
+			            dataType: 'JSON',
+			            data:{cookieId:fingerprint},
+			            async: false,
+						success:function(data){
+							
+							console.log(data);
+							console.log(data == "");		
+							if(data == ""){
+								register(fingerprint);
+							}
+							setCookie("userId",fingerprint);
+						}
+					});
+					
+				}else{
+					$.ajax({
+						url: getHostName()+"/user/findOneById",
+			            type: 'POST',
+			            dataType: 'JSON',
+			            data:{cookieId:fingerprint},
+			            async: false,
+						success:function(data){
+							
+						}
+					});
+				}
 				
 				
 				
 			}
+			
+			
+			function register(id){
+				
+				$.ajax({
+					url: getHostName()+"/user/register",
+		            type: 'POST',
+		            dataType: 'JSON',
+		            data:{cookieId:id},
+		            async: false,
+					success:function(data){
+						console.log(data);
+					}
+				});
+				
+				
+			}
+			
+			function getCookie(Name) {
+				var search = Name + "="//查询检索的值
+				var returnvalue = "";//返回值
+				if (document.cookie.length > 0) {
+					sd = document.cookie.indexOf(search);
+					if (sd!= -1) {
+						sd += search.length;
+						end = document.cookie.indexOf(";", sd);
+						if (end == -1)
+							end = document.cookie.length;
+				        //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+						returnvalue = unescape(document.cookie.substring(sd, end))
+					}
+				} 
+				return returnvalue;
+			}
+			
+			function setCookie(name,value){
+				var Days = 365;
+				var exp = new Date();
+				exp.setTime(exp.getTime() + Days*24*60*60*1000);
+				document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+			}
+			
 		</script>
 	</head>
 	<body>
