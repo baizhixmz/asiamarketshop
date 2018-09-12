@@ -3,12 +3,15 @@ package com.baizhi.clf.controller;
 import com.baizhi.clf.entity.SorderEntity;
 import com.baizhi.clf.entity.SorderTypeEntity;
 import com.baizhi.clf.entity.SuserEntity;
+import com.baizhi.clf.filter.B_AccessFilter;
 import com.baizhi.clf.service.OrderService;
 import com.baizhi.clf.service.OrderTypeService;
 import com.baizhi.clf.service.UserService;
 import com.baizhi.clf.vo.CartCarVO;
 import com.baizhi.clf.vo.OrderDTO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +31,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/order")
 public class OrderController {
 
+	
 	@Autowired
 	private OrderService orderService;
 
@@ -35,6 +39,8 @@ public class OrderController {
 	private UserService userService;
 	@Autowired
 	private OrderTypeService orderTypeService;
+	
+	private Logger log = LoggerFactory.getLogger(OrderController.class);
 
 	@RequestMapping("/createOrder")
 	public String createOrder(String salary, String name, String phone,
@@ -67,8 +73,7 @@ public class OrderController {
 	public List<OrderDTO> findMyOrder() {
 
 		// 由于前台js不支持复杂的json转换所以这里边转换为简单结构
-		List<Map<SorderEntity, List<CartCarVO>>> orders = orderService
-				.findOrders();
+		List<Map<SorderEntity, List<CartCarVO>>> orders = orderService.findOrders();
 
 		ArrayList<OrderDTO> dtoArrayList = new ArrayList<OrderDTO>();
 
@@ -91,9 +96,9 @@ public class OrderController {
 
 	@RequestMapping("/findOrderType")
 	public SorderTypeEntity findOrderType(String orderNum) {
-		System.out.println(orderNum);
+		log.debug(orderNum);
 		SorderTypeEntity orderType = orderTypeService.findByOrderNum(orderNum);
-		System.out.println(orderType);
+		log.debug(orderType.toString());
 		return orderType;
 	}
 }

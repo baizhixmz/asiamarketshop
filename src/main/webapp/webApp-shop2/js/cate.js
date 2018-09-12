@@ -136,11 +136,23 @@ loadRemoteData = function(adminId,adminName) {
             dataType: 'JSON',
             success: function (data) {
                 $.each(JSON.parse(data), function (index, obj) {
+                	
+                	 var arr = obj.name.split("/");
+                     console.log(arr[0]+"========"+arr[1]);
+                     
+                     var cname = "";
+                     
+                     if(arr[1] == null){
+                    	 cname = arr[0];
+                     }else{
+                    	 cname = arr[1];
+                     }
+                	
                     console.log(index, obj);
                     if (index === 0) {
-                        $("#categary-left ul").append($('<li id="search"><span class="iconfont  icon-search"></span></li><li id="allCate" class="active" style="text-align: center"><p><a href="javascript:void(0)">Alle Kategorien</a></p></li><li data-cateId=' + obj.id + '><a href="javascript:void(0)">' + obj.name + '</a></li>'));
+                        $("#categary-left ul").append($('<li id="search"><span class="iconfont  icon-search"></span></li><li id="allCate" class="active" style="text-align: center"><p><a href="javascript:void(0)">Alle Kategorien</a></p></li><li data-cateId=' + obj.id + '><a href="javascript:void(0)">' + cname + '</a></li>'));
                     } else {
-                        $("#categary-left ul").append($('<li data-cateId=' + obj.id + '><a href="javascript:void(0)">' + obj.name + '</a></li>'));
+                        $("#categary-left ul").append($('<li data-cateId=' + obj.id + '><a href="javascript:void(0)">' + cname + '</a></li>'));
                     }
                 })
             }
@@ -165,7 +177,7 @@ loadRemoteData = function(adminId,adminName) {
                     var str = `<li data-goodsId=${el.id}>
                                     <div class="left-img">
                                         <a href="#">
-                                            <img src=${getHostName2()}/asiamarketmanager/${el.imgsrc} alt="">
+                                            <img src="http://mainriversoft.com${el.imgsrc}" alt="">
                                         </a>
                                     </div>
                                     <div class="middle-info">
@@ -205,7 +217,7 @@ loadRemoteData = function(adminId,adminName) {
                     var str = `<li data-goodsId=${el.id}>
                                     <div class="left-img">
                                         <a href="#">
-                                            <img src=${getHostName2()}/asiamarketmanager/${el.imgsrc} alt="">
+                                            <img src="http://mainriversoft.com${el.imgsrc}" alt="">
                                         </a>
                                     </div>
                                     <div class="middle-info">
@@ -247,20 +259,7 @@ loadRemoteData = function(adminId,adminName) {
                     $.each(JSON.parse(data), function (index, el) {
                         totalNum += el.count;
                         totalPrice += el.count * el.sproductEntity.price;
-                        // if(el.sproductEntity.id == $())
-
-                        // var str = `<li>
-                        //                 <div class="shopInfo">
-                        //                     <div class="shopName">${el.sproductEntity.name}</div>
-                        //                     <div class="shopPrice">€${el.sproductEntity.price}</div>
-                        //                     <div class="shopNum">${el.count}</div>
-                        //                 </div>
-                        //                 <div class="btnDel">
-                        //                     <span class="btnClear iconfont icon-cart"></span>
-                        //                     <span class="btnMinus iconfont icon-jian"></span>
-                        //                     <span class="btnAdd iconfont  icon-jia"></span>
-                        //                 </div>
-                        //             </li>`;
+                        
                         var str = `<li>
                                         <div class="shopInfo">
                                             <div class="shopName">${el.sproductEntity.name}</div>
@@ -348,7 +347,7 @@ loadRemoteData = function(adminId,adminName) {
                         var str = `<li data-goodsId=${el.id}>
                                         <div class="left-img">
                                             <a href="#">
-                                                <img src=${getHostName2()}/asiamarketmanager/${el.imgsrc} alt="">
+                                                <img src="http://mainriversoft.com${el.imgsrc}" alt="">
                                             </a>
                                         </div>
                                         <div class="middle-info">

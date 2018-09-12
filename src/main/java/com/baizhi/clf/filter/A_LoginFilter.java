@@ -58,8 +58,7 @@ public class A_LoginFilter implements Filter {
 
 		if (cookie == null) {
 			String cookName = UUID.randomUUID().toString();
-			CookiesUtil.setCookie(response, "userId", cookName, 1000 * 60 * 60
-					* 24 * 365);
+			CookiesUtil.setCookie(response, "userId", cookName, 1000 * 60 * 60 * 24 * 365);
 			SuserEntity user = new SuserEntity();
 			user.setCookieid(cookName);
 			user.setId(UUID.randomUUID().toString());
