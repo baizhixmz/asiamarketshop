@@ -26,8 +26,6 @@ public class UserController {
 	@RequestMapping("/register")
 	public String register(String cookieId, HttpServletResponse response) {
 
-		
-		
 		userService.regist(cookieId);
 
 		return "success";

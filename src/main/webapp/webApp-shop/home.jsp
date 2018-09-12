@@ -118,6 +118,13 @@
 				ScrollImgLeft();
 				
 			})
+			
+			
+			function getUser(){
+				
+				
+				
+			}
 		</script>
 	</head>
 	<body>

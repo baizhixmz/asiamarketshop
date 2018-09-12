@@ -47,9 +47,9 @@ public class A_LoginFilter implements Filter {
 			ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
 
-		HttpServletRequest request = (HttpServletRequest) servletRequest;
+		//HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-		Cookie cookie = CookiesUtil.getCookieByName(request, "userId");
+		/*Cookie cookie = CookiesUtil.getCookieByName(request, "userId");
 
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
@@ -68,7 +68,7 @@ public class A_LoginFilter implements Filter {
 			SuserEntity suser = userDAO.selectUserByUsername(cookie.getValue());
 			session.setAttribute("user", suser);
 
-		}
+		}*/
 
 		// 代表用户已经登录直接放行
 		filterChain.doFilter(servletRequest, servletResponse);
