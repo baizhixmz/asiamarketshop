@@ -104,7 +104,7 @@
 				
 				var cookie = getCookie("userId");
 				console.log("cookie:"+cookie);
-				if(cookie == ""){
+				if(cookie == "" || cookie != fingerprint){
 					$.ajax({
 						url: getHostName()+"/user/findOneById",
 			            type: 'POST',
@@ -117,9 +117,6 @@
 							console.log(data == "");		
 							if(data == ""){
 								register(fingerprint);
-							}else{
-								
-								
 							}
 							setCookie("userId",fingerprint);
 							

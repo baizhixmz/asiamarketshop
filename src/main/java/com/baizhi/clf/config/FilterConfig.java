@@ -35,7 +35,7 @@ public class FilterConfig {
 		B_AccessFilter b_AccessFilter = new B_AccessFilter();
 		registrationBean.setFilter(b_AccessFilter);
 		List<String> urlPatterns = new ArrayList<String>();
-		urlPatterns.add("/toShop/*");
+		urlPatterns.add("/toshop/*");
 		registrationBean.setUrlPatterns(urlPatterns);
 		return registrationBean;
 	}
@@ -59,7 +59,7 @@ public class FilterConfig {
 		D_LanguageFilter d_LanguageFilter = new D_LanguageFilter();
 		registrationBean.setFilter(d_LanguageFilter);
 		List<String> urlPatterns = new ArrayList<String>();
-		urlPatterns.add("/toShop/*");
+		urlPatterns.add("/toshop/*");
 		registrationBean.setUrlPatterns(urlPatterns);
 		return registrationBean;
 	}

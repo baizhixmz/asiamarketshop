@@ -144,7 +144,9 @@ loadRemoteData = function(adminId,adminName) {
                     } else {
                         $("#categary-left ul").append($('<li data-cateId=' + obj.id + '><a href="javascript:void(0)">' + arr[0] + '</a></li>'));
                     }
-                })
+                });
+                /*$("#categary-left ul").append($('<li ><a href="javascript:void(0)"> 联系我们 </a></li>'));*/
+                
             }
         })
     }

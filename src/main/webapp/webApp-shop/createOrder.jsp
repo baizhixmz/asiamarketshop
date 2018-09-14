@@ -216,7 +216,15 @@
 		            }
 		        })
 	    	}else{
-	    		alert("请填写完整的收货信息");
+	    		
+	    		if(name == ""){
+	    			alert("请填写收货人！");
+	    		}else if(phone == ""){
+	    			alert("请填写联系方式！");
+	    		}else if(address == ""){
+	    			alert("请填写收货地址！");
+	    		}
+	    		
 	    	}
         
     }
@@ -241,7 +249,16 @@
 				    }
 			    });
 	    	}else{
-	    		alert("请将信息填写完整");
+	    		
+	    		if(name1  == ""){
+	    			alert("请填写取件人！");
+	    		}else if(phone1 == ""){
+	    			alert("请填写手机号！");
+	    		}else if(qtime == "" || qtime == "选择取货时间"){
+	    			alert("请选择取货时间！");
+	    		}
+	    		
+	    		//alert("请将信息填写完整");
 	    	}
     	
     }

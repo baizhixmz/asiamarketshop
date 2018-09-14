@@ -93,6 +93,8 @@
 				}  
 			}
 			
+			
+			//判断是否为PC端
 			function IsPC() {
 				var flag = true;
 				var sUserAgent = navigator.userAgent.toLowerCase();
@@ -118,20 +120,23 @@
 				
 				ScrollImgLeft();
 				
-				//获取浏览器的唯一标识
-				var fingerprint = new Fingerprint().get(); 
-				
-				console.log("fingerprint:"+fingerprint);
-				getUser(fingerprint);
+				getUser();
 				
 			})
 			
 			
-			function getUser(fingerprint){
+			function getUser(){
 				
 				var cookie = getCookie("userId");
+				
 				console.log("cookie:"+cookie);
+				
 				if(cookie == ""){
+					//获取浏览器的唯一标识
+					var fingerprint = new Fingerprint().get(); 
+					
+					console.log("fingerprint:"+fingerprint);
+					
 					$.ajax({
 						url: getHostName()+"/user/findOneById",
 			            type: 'POST',
@@ -139,9 +144,8 @@
 			            data:{cookieId:fingerprint},
 			            async: false,
 						success:function(data){
-							
-							console.log(data);
-							console.log(data == "");		
+							/* console.log(data);
+							console.log(data == "");	 */	
 							if(data == ""){
 								register(fingerprint);
 							}
@@ -154,7 +158,7 @@
 						url: getHostName()+"/user/findOneById",
 			            type: 'POST',
 			            dataType: 'JSON',
-			            data:{cookieId:fingerprint},
+			            data:{cookieId:cookie},
 			            async: false,
 						success:function(data){
 							
@@ -166,7 +170,7 @@
 				
 			}
 			
-			
+			//添加新的用户信息
 			function register(id){
 				
 				$.ajax({
@@ -183,6 +187,7 @@
 				
 			}
 			
+			//通过name获取cookie
 			function getCookie(Name) {
 				var search = Name + "="//查询检索的值
 				var returnvalue = "";//返回值
@@ -200,6 +205,7 @@
 				return returnvalue;
 			}
 			
+			//设置cookie
 			function setCookie(name,value){
 				var Days = 365;
 				var exp = new Date();
@@ -215,10 +221,11 @@
 			<div class="left">
 				<img src="images/sp3_3.png" alt="">
 			</div>
-			<div class="title">${sessionScope.shopMsg.name1}</div>
+			<div class="title">
+				${sessionScope.shopMsg.name1}
+			</div>
 			<div class="right" style="margin-right: 30px;">
-				<input id="language" type="button" value="German"
-					onclick="toItalyPage();">
+				<input id="language" type="button" value="German" onclick="toItalyPage();">
 			</div>
 			<script>
 				// 去德文界面
@@ -240,6 +247,8 @@
 				<ul>
 					
 				</ul>
+				<br/>
+				<a href="#" id="adminPhone" name="${sessionScope.adminMsg.mobilePhone}" style="margin-left: 16px;">联系我们</a>
 			</div>
 			<div class="categary-right">
 				<div id="scroll_div" class="fl">
@@ -319,8 +328,15 @@
 	
 		<script>
 			$(function(){
+				
 				//alert();
 				loadRemoteData("${sessionScope.adminMsg.id}","${sessionScope.adminMsg.username}");
+				
+				$("#adminPhone").click(function(){
+					alert("店长联系电话："+$(this).attr("name"));
+				});
+			
+			
 			})
 		</script>
 	</body>

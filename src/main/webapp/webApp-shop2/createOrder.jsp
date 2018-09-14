@@ -204,7 +204,16 @@
 	            }
 	        })
     	}else{
-    		alert("Bitte füllen Sie die vollständigen Quittungsinformationen aus");
+    		
+    		if(name == ""){
+    			alert("Bitte füllen Sie den Empfänger aus！");
+    		}else if(phone == ""){
+    			alert("Bitte füllen Sie die Kontaktinformationen aus！");
+    		}else if(address == ""){
+    			alert("Bitte geben Sie die Lieferadresse ein！");
+    		}
+    		
+    		//alert("Bitte füllen Sie die vollständigen Quittungsinformationen aus");
     	}
         
     }
@@ -226,7 +235,16 @@
 			    }
 		    });
     	}else{
-    		alert("Bitte füllen Sie die vollständigen Quittungsinformationen aus");
+    		
+    		if(name1  == ""){
+    			alert("Bitte füllen Sie den Picker aus！");
+    		}else if(phone1 == ""){
+    			alert("Bitte geben Sie die Telefonnummer ein！");
+    		}else if(qtime == "" || qtime == "Wählen Sie Abholzeit"){
+    			alert("Bitte wählen Sie Abholzeit！");
+    		}
+    		
+    		//alert("Bitte füllen Sie die vollständigen Quittungsinformationen aus");
     	}
     }
     
