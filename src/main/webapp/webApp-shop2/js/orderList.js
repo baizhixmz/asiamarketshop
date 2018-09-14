@@ -33,6 +33,19 @@ $(function(){
 								var goodsInfo = JSON.parse(data)[index].cartCarVO;
 
 								$.each(goodsInfo,function(GoodsIndex,GoodsEle){
+									
+									var name = GoodsEle.sproductEntity.name;
+				                	
+				                	var nameArr = name.split("/");
+				                	
+				                	var pname;
+				                	
+				                	if(nameArr.length == 1){
+				                		pname = nameArr[0];
+				                	}else{
+				                		pname = nameArr[1];
+				                	}
+									
 									totalNum+=GoodsEle.count;
 									// console.log(GoodsEle);
 									var orderListContentrStr = `<div class="item"><div class="cart-shop-content">
@@ -41,7 +54,7 @@ $(function(){
 											                    <img src="http://mainriversoft.com${GoodsEle.sproductEntity.imgsrc}" alt=""/>
 											                </a>
 											                <div class="product-info">
-											                    <a href="#" class="info-txt"></a>
+											                    <a href="#" class="info-txt">${pname}</a>
 											                    <div class="option">
 											                        <div class="pull-left">
 											                    		<p class="price">Prezzo unitario：€ <b>${GoodsEle.sproductEntity.price}</b></p>
@@ -79,8 +92,7 @@ $(function(){
 								
 								
 								var orderListFooterStr = `<div class="orderListFooter">
-															<div>Lieferart：${type}</div>
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<div>Lieferart：${type}</div>&nbsp;
 												        	<div>Totale<span class="totalNum"> ${totalNum} </span>prodotti totale： <span class="totalPrice" style="color:#d8505c">€ ${ele.sorderEntity.orderSalary}</span></div>
 												        </div>`;
 

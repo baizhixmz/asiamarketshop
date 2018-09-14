@@ -105,6 +105,11 @@ $(function(){
                 if(data != "" && data!= "[]"){
 	                $("#cart-shop").empty();
 	                $.each(JSON.parse(data),function(index, el) {
+	                	
+	                	var name = el.sproductEntity.name;
+	                	
+	                	var nameArr = name.split("/");
+	                	
                         totalPrice += el.count*el.sproductEntity.price;
 	                    var str = `<div id="cart-shop-content" class="cart-shop-content">
 							            <div class="cart-shop-content-right">
@@ -112,7 +117,7 @@ $(function(){
 							                    <img src="http://mainriversoft.com${el.sproductEntity.imgsrc}" alt=""/>
 							                </a>
 							                <div class="product-info">
-							                    <a href="#" class="info-txt">${el.sproductEntity.name}</a>
+							                    <a href="#" class="info-txt">${nameArr[0]}</a>
 							                    <p class="price">€${el.sproductEntity.price}</p>
 							                    <div class="option" data-goodsId="${el.sproductEntity.id}">
 							                        <div class="pull-left">

@@ -56,16 +56,29 @@ $(function(){
                 if(data != "" && data!= "[]"){
 	                $("#order_context").empty();
 	                $.each(JSON.parse(data),function(index, el) {
+	                	
+	                	var name = el.sproductEntity.name;
+	                	
+	                	var nameArr = name.split("/");
+	                	
+	                	var pname;
+	                	
+	                	if(nameArr.length == 1){
+	                		pname = nameArr[0];
+	                	}else{
+	                		pname = nameArr[1];
+	                	}
+	                	
                         totalPrice += el.count*el.sproductEntity.price;
 	                    var str = `<div id="cart-shop-content" class="cart-shop-content">
 							            <div class="cart-shop-content-right">
 							                <a href="#" class="product-img">
-							                    <img src="${getHostName2()}/net_shop_manager/${el.sproductEntity.imgsrc}" alt=""/>
+							                    <img width="25px" height="auto" src="${getHostName2()}/${el.sproductEntity.imgsrc}" alt=""/>
 							                </a>
 							                <div class="product-info">
 							                	<table style="width:100%;">
 							                		<tr>
-							                			<td style="width:70%;"><a href="#" class="info-txt">${el.sproductEntity.name}</a></td>
+							                			<td style="width:70%;"><a href="#" class="info-txt">${pname}</a></td>
 							                			<td style="width:30%;"><font color="red">€${el.sproductEntity.price}</font></td>
 							                		</tr>
 							                    </table>

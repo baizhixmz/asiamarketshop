@@ -174,14 +174,28 @@ loadRemoteData = function(adminId,adminName) {
             success: function (data) {
                 $("#product-info").empty();
                 $.each(JSON.parse(data), function (index, el) {
-                    var str = `<li data-goodsId=${el.id}>
+                    
+                	var name = el.name;
+                	
+                	var nameArr = name.split("/");
+                	
+                	var pname;
+                	
+                	if(nameArr.length == 1){
+                		pname = nameArr[0];
+                	}else{
+                		pname = nameArr[1];
+                	}
+                	
+                	
+                	var str = `<li data-goodsId=${el.id}>
                                     <div class="left-img">
                                         <a href="#">
                                             <img src="http://mainriversoft.com${el.imgsrc}" alt="">
                                         </a>
                                     </div>
                                     <div class="middle-info">
-                                        <div class="product-name">${el.name}
+                                        <div class="product-name">${pname}
                                         </div>
                                         <div class="product-name">Einheit：${el.italyUnit}</div>
                                         <div class="product-price">
@@ -214,6 +228,19 @@ loadRemoteData = function(adminId,adminName) {
             success: function (data) {
                 $("#product-info").empty();
                 $.each(JSON.parse(data), function (index, el) {
+                	
+                	var name = el.name;
+                	
+                	var nameArr = name.split("/");
+                	
+                	var pname;
+                	
+                	if(nameArr.length == 1){
+                		pname = nameArr[0];
+                	}else{
+                		pname = nameArr[1];
+                	}
+                	
                     var str = `<li data-goodsId=${el.id}>
                                     <div class="left-img">
                                         <a href="#">
@@ -221,7 +248,7 @@ loadRemoteData = function(adminId,adminName) {
                                         </a>
                                     </div>
                                     <div class="middle-info">
-                                        <div class="product-name">${el.name}
+                                        <div class="product-name">${pname}
                                         </div>
                                         <div class="product-name">Einheit：${el.italyUnit}</div>
                                         <div class="product-price">
@@ -260,9 +287,21 @@ loadRemoteData = function(adminId,adminName) {
                         totalNum += el.count;
                         totalPrice += el.count * el.sproductEntity.price;
                         
+                        var name = el.sproductEntity.name;
+                    	
+                    	var nameArr = name.split("/");
+                    	
+                    	var pname;
+                    	
+                    	if(nameArr.length == 1){
+                    		pname = nameArr[0];
+                    	}else{
+                    		pname = nameArr[1];
+                    	}
+                        
                         var str = `<li>
                                         <div class="shopInfo">
-                                            <div class="shopName">${el.sproductEntity.name}</div>
+                                            <div class="shopName">${pname}</div>
                                             <div class="shopPrice">€${el.sproductEntity.price}</div>
                                             <div class="shopNum">${el.count}</div>
                                         </div>
@@ -344,6 +383,19 @@ loadRemoteData = function(adminId,adminName) {
                 if (data != "[]") {
                     $("#product-info").empty();
                     $.each(JSON.parse(data), function (index, el) {
+                    	
+                    	var name = el.name;
+                    	
+                    	var nameArr = name.split("/");
+                    	
+                    	var pname;
+                    	
+                    	if(nameArr.length == 1){
+                    		pname = nameArr[0];
+                    	}else{
+                    		pname = nameArr[1];
+                    	}
+                    	
                         var str = `<li data-goodsId=${el.id}>
                                         <div class="left-img">
                                             <a href="#">
@@ -351,7 +403,7 @@ loadRemoteData = function(adminId,adminName) {
                                             </a>
                                         </div>
                                         <div class="middle-info">
-                                            <div class="product-name">${el.name}</div>
+                                            <div class="product-name">${pname}</div>
                                             <div class="product-name">Einheit：${el.italyUnit}</div>
                                             <div class="product-price">
                                             Preis：€${el.price}

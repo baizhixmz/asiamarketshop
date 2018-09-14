@@ -39,7 +39,7 @@
 					<span>Einkaufswagen</span>
 				</li>
 			</a>
-			<a href="mine.jsp">
+			<a href="orderList.jsp">
 				<li>
 					<i class="iconfont icon-account"></i>
 					<span>Meine Bestellung</span>

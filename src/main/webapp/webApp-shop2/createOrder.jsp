@@ -200,7 +200,7 @@
 	            dataType: 'JSON',
 	            data: {salary: totalPrice,name:name,phone:phone,address:address},
 	            success: function (data) {
-	            	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
+	            	location.href="${pageContext.request.contextPath}/webApp-shop2/orderList.jsp";
 	            }
 	        })
     	}else{
@@ -231,7 +231,7 @@
 			    dataType: 'JSON',
 			    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
 			    success: function (data) {
-			    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
+			    	location.href="${pageContext.request.contextPath}/webApp-shop2/orderList.jsp";
 			    }
 		    });
     	}else{

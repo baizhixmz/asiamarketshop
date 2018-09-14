@@ -33,6 +33,11 @@ $(function(){
 								var goodsInfo = JSON.parse(data)[index].cartCarVO;
 								
 								$.each(goodsInfo,function(GoodsIndex,GoodsEle){
+									
+									var name = GoodsEle.sproductEntity.name;
+			                    	
+			                    	var nameArr = name.split("/");
+									
 									totalNum+=GoodsEle.count;
 									// console.log(GoodsEle);
 									var orderListContentrStr = `<div class="item"><div class="cart-shop-content">
@@ -41,10 +46,10 @@ $(function(){
 											                    <img src="http://mainriversoft.com/${GoodsEle.sproductEntity.imgsrc}" alt=""/>
 											                </a>
 											                <div class="product-info">
-											                    <a href="#" class="info-txt">${GoodsEle.sproductEntity.name}</a>
+											                    <a href="#" class="info-txt">${nameArr[0]}</a>
 											                    <div class="option">
 											                        <div class="pull-left">
-											                    		<p class="price">商品单价：€ <b>${GoodsEle.sproductEntity.price}</b></p>
+											                    		<p class="price">商品单价：€<b>${GoodsEle.sproductEntity.price}</b></p>
 											                            <span class="num">购买数量：<b>${GoodsEle.count}</b></span>
 											                        </div>
 											                    </div>

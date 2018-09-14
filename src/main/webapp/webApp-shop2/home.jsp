@@ -93,18 +93,23 @@
 				ScrollImgLeft();
 				
 				//获取浏览器的唯一标识
-				var fingerprint = new Fingerprint().get(); 
 				
-				console.log("fingerprint:"+fingerprint);
-				getUser(fingerprint);
+				getUser();
 				
 			})
 			
-			function getUser(fingerprint){
+			function getUser(){
 				
 				var cookie = getCookie("userId");
+				
 				console.log("cookie:"+cookie);
-				if(cookie == "" || cookie != fingerprint){
+				
+				if(cookie == ""){
+					//获取浏览器的唯一标识
+					var fingerprint = new Fingerprint().get(); 
+					
+					console.log("fingerprint:"+fingerprint);
+					
 					$.ajax({
 						url: getHostName()+"/user/findOneById",
 			            type: 'POST',
@@ -112,18 +117,26 @@
 			            data:{cookieId:fingerprint},
 			            async: false,
 						success:function(data){
-							
-							console.log(data);
-							console.log(data == "");		
+							/* console.log(data);
+							console.log(data == "");*/	
 							if(data == ""){
 								register(fingerprint);
 							}
 							setCookie("userId",fingerprint);
-							
-							
 						}
 					});
 					
+				}else{
+					$.ajax({
+						url: getHostName()+"/user/findOneById",
+			            type: 'POST',
+			            dataType: 'JSON',
+			            data:{cookieId:cookie},
+			            async: false,
+						success:function(data){
+							
+						}
+					});
 				}
 				
 				
@@ -145,19 +158,6 @@
 				});
 				
 				
-			}
-			
-			function getUser(id){
-				$.ajax({
-					url: getHostName()+"/user/register",
-		            type: 'POST',
-		            dataType: 'JSON',
-		            data:{cookieId:id},
-		            async: false,
-					success:function(data){
-						console.log(data);
-					}
-				});
 			}
 			
 			function getCookie(Name) {
