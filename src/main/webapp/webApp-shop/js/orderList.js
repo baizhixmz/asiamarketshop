@@ -43,7 +43,7 @@ $(function(){
 									var orderListContentrStr = `<div class="item"><div class="cart-shop-content">
 											            <div class="cart-shop-content-right">
 											                <a href="#" class="product-img">
-											                    <img src="http://mainriversoft.com/${GoodsEle.sproductEntity.imgsrc}" alt=""/>
+											                    <img src="${getHostName2()}${GoodsEle.sproductEntity.imgsrc}" alt=""/>
 											                </a>
 											                <div class="product-info">
 											                    <a href="#" class="info-txt">${nameArr[0]}</a>

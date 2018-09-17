@@ -114,7 +114,7 @@ $(function(){
 	                    var str = `<div id="cart-shop-content" class="cart-shop-content">
 							            <div class="cart-shop-content-right">
 							                <a href="#" class="product-img">
-							                    <img src="http://mainriversoft.com${el.sproductEntity.imgsrc}" alt=""/>
+							                    <img src="${getHostName2()}${el.sproductEntity.imgsrc}" alt=""/>
 							                </a>
 							                <div class="product-info">
 							                    <a href="#" class="info-txt">${nameArr[0]}</a>

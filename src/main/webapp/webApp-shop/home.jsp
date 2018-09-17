@@ -219,10 +219,10 @@
 		<!-- 头部 -->
 		<header>
 			<div class="left">
-				<img src="images/sp3_3.png" alt="">
+				${sessionScope.shopMsg.name1}
 			</div>
 			<div class="title">
-				${sessionScope.shopMsg.name1}
+				<input id="language" type="button" name="${sessionScope.adminMsg.mobilePhone}" value="联系我们" onclick="adminPhone(this);">
 			</div>
 			<div class="right" style="margin-right: 30px;">
 				<input id="language" type="button" value="German" onclick="toItalyPage();">
@@ -247,8 +247,7 @@
 				<ul>
 					
 				</ul>
-				<br/>
-				<a href="#" id="adminPhone" name="${sessionScope.adminMsg.mobilePhone}" style="margin-left: 16px;">联系我们</a>
+				
 			</div>
 			<div class="categary-right">
 				<div id="scroll_div" class="fl">
@@ -331,13 +330,16 @@
 				
 				//alert();
 				loadRemoteData("${sessionScope.adminMsg.id}","${sessionScope.adminMsg.username}");
-				
-				$("#adminPhone").click(function(){
-					alert("店长联系电话："+$(this).attr("name"));
-				});
 			
 			
 			})
+			
+			function adminPhone(obj){
+				
+				alert("店长联系电话："+$(obj).attr("name"));
+				
+			}
+			
 		</script>
 	</body>
 </html>

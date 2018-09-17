@@ -189,10 +189,10 @@
 <body>
 	<!-- 头部 -->
 	<header>
-		<div class="left">
-			<img src="images/sp3_3.png" alt="">
+		<div class="left">${sessionScope.shopMsg.name2}</div>
+		<div class="title">
+			<input id="language" type="button" name="${sessionScope.adminMsg.mobilePhone}" value="Kontaktnummer" onclick="adminPhone(this);">
 		</div>
-		<div class="title">${sessionScope.shopMsg.name2}</div>
 		<div class="right" style="margin-right: 30px;"><input id="language" type="button" value="China" onclick="toChinaPage();"></div>
 		<script>
 			// 去中文界面
@@ -210,12 +210,7 @@
     	</div>
         <div id="categary-left" class="categary-left">
             <ul>
-<!--            <li class=""><a href="javascript:;">热门推荐</a></li>
-                <li class="active"><a href="javascript:;">潮流女装</a></li>
-                <li class=""><a href="javascript:;">品牌男装</a></li>
-                <li class=""><a href="javascript:;">内衣配饰</a></li>
-                <li class=""><a href="javascript:;">家用电器</a></li>
-                <li class=""><a href="javascript:;">电脑办公</a></li>-->
+        
             </ul>
         </div>
         <div class="categary-right">
@@ -307,6 +302,13 @@
 		$(function(){
 			//alert();
 			loadRemoteData("${sessionScope.adminMsg.id}","${sessionScope.adminMsg.username}");
+		
+			$("#adminPhone").click(function(){
+				alert("Manager-Kontaktnummer："+$(this).attr("name"));
+			});
+			
+			
+		
 		})
 	</script>
 </body>

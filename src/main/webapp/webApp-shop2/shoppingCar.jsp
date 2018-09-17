@@ -17,7 +17,7 @@
 <!-- 头部 -->
 <header>
     <div class="left"></div>
-    <div class="title">Carrello della spesa</div>
+    <div class="title">Einkaufswagen</div>
     <div class="right"></div>
 </header>
 
@@ -78,7 +78,7 @@
 </script>
 <div id="createList" class="createList">
     <div id="btnPrice" class="btnPrice">€ 0.00</div>
-    <div id="btnPay" class="btnPay"><a href="createOrder.jsp">Crea un ordine</a></div>
+    <div id="btnPay" class="btnPay"><a href="createOrder.jsp">Bestellung erstellen</a></div>
 </div>
 
 <!--     <div id="mask" class="mask">

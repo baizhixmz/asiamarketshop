@@ -192,7 +192,6 @@
     	var address = $("#address").val();
     	
     	if(temp == 1 && name!="" && phone!="" && address!=""){
-	        console.log("----------createOrder------------");
     		var totalPrice = $("#btnPrice").text().substring(2);
 	        $.ajax({
 	            url: getHostName() + '/order/createOrder',
@@ -223,7 +222,7 @@
     	var totalPrice = $("#btnPrice").text().substring(2);
     	var qtime = $("#test").text();
     	var name1 = $("#name1").val();
-    	var phone1 = $("#phone").val();
+    	var phone1 = $("#phone1").val();
     	if(qtime != "" && name1 != "" && phone1 != "" && qtime != "Wählen Sie Abholzeit"){
 	    	$.ajax({
 			    url: getHostName() + '/order/createOrder',
@@ -235,7 +234,6 @@
 			    }
 		    });
     	}else{
-    		
     		if(name1  == ""){
     			alert("Bitte füllen Sie den Picker aus！");
     		}else if(phone1 == ""){
@@ -244,7 +242,6 @@
     			alert("Bitte wählen Sie Abholzeit！");
     		}
     		
-    		//alert("Bitte füllen Sie die vollständigen Quittungsinformationen aus");
     	}
     }
     

@@ -153,9 +153,9 @@ $(function(){
                                 <div class="ico-shoppingCar">
                                     <span class="iconfont icon-cart"></span>
                                 </div>
-                                <div class="txt">Il carrello è vuoto</div>
+                                <div class="txt">Einkaufswagen ist leer</div>
                                 <div>
-                                    <div class="btn btnSure m0"><a href="home.jsp">Vai a visitare</a></div>
+                                    <div class="btn btnSure m0"><a href="home.jsp">Geh einkaufen</a></div>
                                 </div>
                             </div>`;
                         $("#cart-shop").append(str);

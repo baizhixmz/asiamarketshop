@@ -67,7 +67,7 @@ $(function(){
 	                    var str = `<div id="cart-shop-content" class="cart-shop-content">
 							            <div class="cart-shop-content-right">
 							                <a href="#" class="product-img">
-							                    <img width="25px" height="auto" src="http://mainriversoft.com/${el.sproductEntity.imgsrc}" alt=""/>
+							                    <img width="25px" height="auto" src="${getHostName2()}${el.sproductEntity.imgsrc}" alt=""/>
 							                </a>
 							                <div class="product-info">
 							                	<table style="width:100%;">

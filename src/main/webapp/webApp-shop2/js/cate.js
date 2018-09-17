@@ -138,7 +138,6 @@ loadRemoteData = function(adminId,adminName) {
                 $.each(JSON.parse(data), function (index, obj) {
                 	
                 	 var arr = obj.name.split("/");
-                     console.log(arr[0]+"========"+arr[1]);
                      
                      var cname = "";
                      
@@ -191,7 +190,7 @@ loadRemoteData = function(adminId,adminName) {
                 	var str = `<li data-goodsId=${el.id}>
                                     <div class="left-img">
                                         <a href="#">
-                                            <img src="http://mainriversoft.com${el.imgsrc}" alt="">
+                                            <img src="${getHostName2()}${el.imgsrc}" alt="">
                                         </a>
                                     </div>
                                     <div class="middle-info">
@@ -244,7 +243,7 @@ loadRemoteData = function(adminId,adminName) {
                     var str = `<li data-goodsId=${el.id}>
                                     <div class="left-img">
                                         <a href="#">
-                                            <img src="http://mainriversoft.com${el.imgsrc}" alt="">
+                                            <img src="${getHostName2()}${el.imgsrc}" alt="">
                                         </a>
                                     </div>
                                     <div class="middle-info">
@@ -399,7 +398,7 @@ loadRemoteData = function(adminId,adminName) {
                         var str = `<li data-goodsId=${el.id}>
                                         <div class="left-img">
                                             <a href="#">
-                                                <img src="http://mainriversoft.com${el.imgsrc}" alt="">
+                                                <img src="${getHostName2()}${el.imgsrc}" alt="">
                                             </a>
                                         </div>
                                         <div class="middle-info">

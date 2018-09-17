@@ -22,11 +22,21 @@ $(function(){
 				success:function(data){
 					if(data!=""){
 						$.each(JSON.parse(data),function(index,ele){
+							
+							var status = ele.sorderEntity.orderStatus;
+							if(status == "待处理"){
+								status = "Ausstehend";
+							}else if(status == "已处理"){
+								status = "Verarbeitet";
+							}else{
+								status = "Storniert";
+							}
+							
 							var totalNum = 0;
 									var orderListheaderStr = `<div class="orderDetail">
 											<div class="orderListHeader">
 									        	<div class="orderNumber" >Numero:${ele.sorderEntity.orderNum}</div>
-									        	<div class="orderStatus">Stato: <span style="color:#d8505c ">${ele.sorderEntity.orderStatus}</span></div>
+									        	<div class="orderStatus">Stato: <span style="color:#d8505c ">${status}</span></div>
 									        </div>
 										</div>`;
 								$("#cart-shop").append(orderListheaderStr);

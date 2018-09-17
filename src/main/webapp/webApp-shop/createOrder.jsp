@@ -201,20 +201,29 @@
     	var phone = $("#phone").val();
     	var address = $("#address").val();
     	
+    	var patt =  /^[0-9]+$/;
+    	
     	var f = checkMobiles(phone);
 		
     	    	
 	    	if(temp == 1 && name!="" && phone!="" && address!=""){
-	    		var totalPrice = $("#btnPrice").text().substring(2);
-		        $.ajax({
-		            url: getHostName() + '/order/createOrder',
-		            type: 'POST',
-		            dataType: 'JSON',
-		            data: {salary: totalPrice,name:name,phone:phone,address:address},
-		            success: function (data) {
-		            	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
-		            }
-		        })
+	    		
+	    		if(patt.test(phone)){
+		    		var totalPrice = $("#btnPrice").text().substring(2);
+			        $.ajax({
+			            url: getHostName() + '/order/createOrder',
+			            type: 'POST',
+			            dataType: 'JSON',
+			            data: {salary: totalPrice,name:name,phone:phone,address:address},
+			            success: function (data) {
+			            	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
+			            }
+			        }); 
+	    		}else{
+	    			
+	    			alert("请填写正确的手机号！！！");
+	    			
+	    		}
 	    	}else{
 	    		
 	    		if(name == ""){
@@ -237,17 +246,25 @@
     	var name1 = $("#name1").val();
     	var phone1 = $("#phone1").val();
     	
+    	var patt =  /^[0-9]+$/;
+    	
     	var f = checkMobiles(phone);     
 	    	if(qtime != "" && name1 != "" && phone1 != "" && qtime != "选择取货时间"){
-			    $.ajax({
-				    url: getHostName() + '/order/createOrder',
-				    type: 'POST',
-				    dataType: 'JSON',
-				    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
-				    success: function (data) {
-				    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
-				    }
-			    });
+			    
+	    		if(patt.test(phone)){
+	    		
+		    		$.ajax({
+					    url: getHostName() + '/order/createOrder',
+					    type: 'POST',
+					    dataType: 'JSON',
+					    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
+					    success: function (data) {
+					    	location.href="${pageContext.request.contextPath}/webApp-shop/orderList.jsp";
+					    }
+				    });
+	    		}else{
+	    			alert("Bitte geben Sie die richtige Handynummer ein!");
+	    		}
 	    	}else{
 	    		
 	    		if(name1  == ""){
@@ -258,7 +275,6 @@
 	    			alert("请选择取货时间！");
 	    		}
 	    		
-	    		//alert("请将信息填写完整");
 	    	}
     	
     }
