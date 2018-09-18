@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="js/layui/css/layui.css">
     <link rel="stylesheet" href="js/jiaoben5653/css/pickuptime.css" />
+    <link rel="stylesheet" href="jQueryYdtc/css/global.css"/>
     <style type="text/css">
     	.createList {
 		    position: fixed;
@@ -65,6 +66,7 @@
     <script src="js/lib/zepto.min.js"></script>
 	<script type="text/javascript" src="js/layui/layui.js"></script>
 	<script src="js/createOrder.js"></script>
+	<script type="text/javascript" src="jQueryYdtc/js/windowOpen.js" ></script>
 	<script type="text/javascript">
 		var temp;
 		layui.use('element', function(){
@@ -238,7 +240,7 @@
         
     }
     
-	function createOrder2() {
+	function createOrder2(obj) {
     	
     	var totalPrice = $("#btnPrice").text().substring(2);
     	
@@ -251,7 +253,7 @@
     	var f = checkMobiles(phone);     
 	    	if(qtime != "" && name1 != "" && phone1 != "" && qtime != "选择取货时间"){
 			    
-	    		if(patt.test(phone)){
+	    		if(patt.test(phone1)){
 	    		
 		    		$.ajax({
 					    url: getHostName() + '/order/createOrder',
@@ -263,7 +265,10 @@
 					    }
 				    });
 	    		}else{
-	    			alert("Bitte geben Sie die richtige Handynummer ein!");
+	    			
+	    			alert("请填写正确的手机号");
+	    			
+	    			//alert("Bitte geben Sie die richtige Handynummer ein!");
 	    		}
 	    	}else{
 	    		

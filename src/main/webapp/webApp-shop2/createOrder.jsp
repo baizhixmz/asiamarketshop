@@ -191,17 +191,24 @@
     	var phone = $("#phone").val();
     	var address = $("#address").val();
     	
+    	var patt =  /^[0-9]+$/;
+    	
     	if(temp == 1 && name!="" && phone!="" && address!=""){
-    		var totalPrice = $("#btnPrice").text().substring(2);
-	        $.ajax({
-	            url: getHostName() + '/order/createOrder',
-	            type: 'POST',
-	            dataType: 'JSON',
-	            data: {salary: totalPrice,name:name,phone:phone,address:address},
-	            success: function (data) {
-	            	location.href="${pageContext.request.contextPath}/webApp-shop2/orderList.jsp";
-	            }
-	        })
+    		
+    		if(patt.test(phone)){
+	    		var totalPrice = $("#btnPrice").text().substring(2);
+		        $.ajax({
+		            url: getHostName() + '/order/createOrder',
+		            type: 'POST',
+		            dataType: 'JSON',
+		            data: {salary: totalPrice,name:name,phone:phone,address:address},
+		            success: function (data) {
+		            	location.href="${pageContext.request.contextPath}/webApp-shop2/orderList.jsp";
+		            }
+		        })
+    		}else{
+    			alert("Bitte geben Sie die richtige Handynummer ein!");
+    		}
     	}else{
     		
     		if(name == ""){
@@ -223,23 +230,29 @@
     	var qtime = $("#test").text();
     	var name1 = $("#name1").val();
     	var phone1 = $("#phone1").val();
+    	
+    	var patt =  /^[0-9]+$/;
     	if(qtime != "" && name1 != "" && phone1 != "" && qtime != "Wählen Sie Abholzeit"){
-	    	$.ajax({
-			    url: getHostName() + '/order/createOrder',
-			    type: 'POST',
-			    dataType: 'JSON',
-			    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
-			    success: function (data) {
-			    	location.href="${pageContext.request.contextPath}/webApp-shop2/orderList.jsp";
-			    }
-		    });
+    		if(patt.test(phone1)){
+	    		$.ajax({
+				    url: getHostName() + '/order/createOrder',
+				    type: 'POST',
+				    dataType: 'JSON',
+				    data: {salary: totalPrice,name:name1,phone:phone1,qtime:qtime},
+				    success: function (data) {
+				    	location.href="${pageContext.request.contextPath}/webApp-shop2/orderList.jsp";
+				    }
+			    });
+    		}else{
+    			alert("Bitte geben Sie die richtige Handynummer ein!");
+    		}
     	}else{
     		if(name1  == ""){
     			alert("Bitte füllen Sie den Picker aus！");
     		}else if(phone1 == ""){
     			alert("Bitte geben Sie die Telefonnummer ein！");
     		}else if(qtime == "" || qtime == "Wählen Sie Abholzeit"){
-    			alert("Bitte wählen Sie Abholzeit！");
+    			alert("Bitte wählen Sie Abholzeit！"); 
     		}
     		
     	}

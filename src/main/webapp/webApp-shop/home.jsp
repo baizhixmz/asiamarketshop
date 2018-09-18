@@ -12,9 +12,13 @@
 		<link rel="stylesheet" href="css/header.css">
 		<link rel="stylesheet" href="css/footer.css">
 		<link rel="stylesheet" href="css/cate.css">
+		
+		<link rel="stylesheet" href="jQueryYdtc/css/global.css"/>
+		
 		<script src="js/lib/zepto.min.js"></script>
 		<script src="js/fingerprint.js"></script>
 		<script src="js/cate.js"></script>
+		<script type="text/javascript" src="jQueryYdtc/js/windowOpen.js" ></script>
 		<style>
 			.addOne {
 				display: inline-block;
@@ -225,7 +229,7 @@
 				<input id="language" type="button" name="${sessionScope.adminMsg.mobilePhone}" value="联系我们" onclick="adminPhone(this);">
 			</div>
 			<div class="right" style="margin-right: 30px;">
-				<input id="language" type="button" value="German" onclick="toItalyPage();">
+				<input id="language" type="button" value="Deutsch" onclick="toItalyPage();">
 			</div>
 			<script>
 				// 去德文界面
@@ -254,9 +258,7 @@
 					<div id="scroll_begin" >
 						<font size="2" color="red">
 							这个网站为了更好的为你服务使用了cookie，您可以把它关闭，但是网站的功能会受到影响 <span
-							class="pad_right"> </span> "This website uses cookies to ensure
-							you get the best experience on our website，you can disable it but
-							the website will not function properly"
+							class="pad_right"> </span>
 						</font>
 	
 					</div>
@@ -331,12 +333,24 @@
 				//alert();
 				loadRemoteData("${sessionScope.adminMsg.id}","${sessionScope.adminMsg.username}");
 			
+				$('.open-window-close-out-fail').on('click',function(){
+					setTitle = '店铺联系方式';
+					setContents = '网络异常平仓失败，请稍后再试';
+					setButton = '["确认"]';
+					$(this).openWindow(setTitle,setContents,setButton);
+				});
+				
 			
 			})
 			
 			function adminPhone(obj){
 				
-				alert("店长联系电话："+$(obj).attr("name"));
+				setTitle = '店铺联系方式';
+				setContents = '店长联系电话：'+$(obj).attr("name");
+				setButton = '["确认"]';
+				$(obj).openWindow(setTitle,setContents,setButton);
+				
+				//alert("店长联系电话："+$(obj).attr("name"));
 				
 			}
 			

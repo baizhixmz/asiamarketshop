@@ -67,8 +67,8 @@ $(function(){
 											                    <a href="#" class="info-txt">${pname}</a>
 											                    <div class="option">
 											                        <div class="pull-left">
-											                    		<p class="price">Prezzo unitario：€ <b>${GoodsEle.sproductEntity.price}</b></p>
-											                            <span class="num">Quantità d'acquisto：<b>${GoodsEle.count}</b></span>
+											                    		<p class="price">Produkt Stückpreis：€ <b>${GoodsEle.sproductEntity.price}</b></p>
+											                            <span class="num">Einkaufsmenge：<b>${GoodsEle.count}</b></span>
 											                        </div>
 											                    </div>
 											                </div>

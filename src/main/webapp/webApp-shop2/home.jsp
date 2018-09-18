@@ -11,9 +11,12 @@
 	<link rel="stylesheet" href="css/header.css">
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="stylesheet" href="css/cate.css">
+	<link rel="stylesheet" href="jQueryYdtc/css/global.css"/>
+	
 	<script src="js/lib/zepto.min.js"></script>
 	<script src="js/fingerprint.js"></script>
 	<script src="js/cate.js"></script>
+	<script type="text/javascript" src="jQueryYdtc/js/windowOpen.js" ></script>
 	<style>
 		.addOne{
 			display:inline-block;
@@ -193,7 +196,7 @@
 		<div class="title">
 			<input id="language" type="button" name="${sessionScope.adminMsg.mobilePhone}" value="Kontaktnummer" onclick="adminPhone(this);">
 		</div>
-		<div class="right" style="margin-right: 30px;"><input id="language" type="button" value="China" onclick="toChinaPage();"></div>
+		<div class="right" style="margin-right: 30px;"><input id="language" type="button" value="中文" onclick="toChinaPage();"></div>
 		<script>
 			// 去中文界面
 			function toChinaPage(){
@@ -218,10 +221,10 @@
         	<div id="scroll_div" class="fl">
 					<div id="scroll_begin" >
 						<font size="2" color="red">
-							这个网站为了更好的为你服务使用了cookie，您可以把它关闭，但是网站的功能会受到影响 <span
-							class="pad_right"> </span> "This website uses cookies to ensure
+							"This website uses cookies to ensure
 							you get the best experience on our website，you can disable it but
 							the website will not function properly"
+							<span class="pad_right"> </span> 
 						</font>
 	
 					</div>
@@ -301,15 +304,18 @@
 	<script>
 		$(function(){
 			//alert();
-			loadRemoteData("${sessionScope.adminMsg.id}","${sessionScope.adminMsg.username}");
-		
-			$("#adminPhone").click(function(){
-				alert("Manager-Kontaktnummer："+$(this).attr("name"));
-			});
-			
-			
-		
+			loadRemoteData("${sessionScope.adminMsg.id}","${sessionScope.adminMsg.username}");		
 		})
+		
+		
+		function adminPhone(obj){
+			
+			setTitle = 'Shop-Kontakt';
+			setContents = 'Manager-Kontaktnummer：'+$(obj).attr("name");
+			setButton = '["Bestätigen Sie"]';
+			$(obj).openWindow(setTitle,setContents,setButton);
+				
+		}
 	</script>
 </body>
 </html>
