@@ -21,6 +21,10 @@ loadRemoteData = function(adminId,adminName) {
 
     // 点击分类切换对应商品
     $(".categary-left").on("touchend", "li", function () {
+    	
+    	var name = $(this).text();
+    	$("#categoryName").text(name);
+    	
         if ($(this).index() != 0 && $(this).index() != 1) {
             $(this).addClass('active').siblings('li').removeClass('active');
             // 获取对应分类商品

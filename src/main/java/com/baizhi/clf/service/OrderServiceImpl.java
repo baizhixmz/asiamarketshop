@@ -66,8 +66,12 @@ public class OrderServiceImpl implements OrderService {
 
 		// 插入订单数据
 		orderDAO.insertOrder(order);
+		
+		
 		GoEasy goEasy = new GoEasy("BC-57c75abca21540b89bf00e84e5d7c7f6");
 		goEasy.publish(admin.getId(), "您有一个新订单，请及时处理！！！");
+		
+		
 		// 添加当前订单信息入库 并添加订单项
 		Map<String, CartCarVO> cartCar = (Map<String, CartCarVO>) session.getAttribute("cartCar");
 

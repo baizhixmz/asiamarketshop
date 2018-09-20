@@ -5,7 +5,7 @@
     <script src="${pageContext.request.contextPath}/webApp-shop/js/ContextPath.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <title>Bestellung erstellen</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
@@ -118,19 +118,11 @@
 <!-- 头部 -->
 <header>
     <div class="left"></div>
-    <div class="title">Bestellung erstellen</div>
+    <div class="title1">Bestellung erstellen</div>
     <div class="right"></div>
 </header>
 
 <div id="cart-shop" style="margin-top:50px;" >
-	<!-- <div style="width: 100%;">
-		<div style="float: right;width: 50%;background-color: lime;">
-			<button class="layui-btn layui-btn-fluid layui-btn-primary">邮寄</button>
-		</div>
-		<div style="width: 50%;background-color: red;">
-			<button class="layui-btn layui-btn-fluid layui-btn-primary">上门取货</button>
-		</div>
-	</div> -->
 	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief"> 
 		<ul class="layui-tab-title">
 		<li class="layui-this">Abholung zu Hause</li>
@@ -138,19 +130,35 @@
 		</ul>
 		<div class="layui-tab-content">
 			<div class="layui-tab-item layui-show">
-				<ul>
+				
+				<table style="border-collapse:separate; border-spacing:0px 10px;">
+					<tr>
+						<td align="right">Name：</td>
+						<td><input type="text" id="name1" name="name1"/></td>
+					</tr>
+					<tr>
+						<td align="right">Handynummer：</td>
+						<td><input type="text" id="phone1" name="phone1"/></td>
+					</tr>
+					<tr>
+						<td align="right">Abholzeit：</td>
+						<td><input type="text" readonly="readonly" value="Wählen Sie Abholzeit" id="qtime"/></td>
+					</tr>
+				</table>
+				
+				<!-- <ul>
 					<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name：<input type="text" id="name1" name="name1"/></li>
 					<li>Handynummer：<input type="text" id="phone1" name="phone1"/></li>
 					<li class='test' id='test'>Wählen Sie Abholzeit</li>
-				</ul>
+				</ul> -->
 				
 				<script type="text/javascript">
 					$(document).ready(function(){
-						$('#test').on('click',function(){
+						$('#qtime').on('click',function(){
 							//数字为正整数，0表示当天可取
 							pickuptime.init(0,function(data){
 								console.log(data.split(" "));//回调
-								$("#test").html(data.split(" "));
+								$("#qtime").attr("value",data.split(" "));
 							});
 						});
 					});
@@ -227,7 +235,7 @@
 	function createOrder2() {
     	
     	var totalPrice = $("#btnPrice").text().substring(2);
-    	var qtime = $("#test").text();
+    	var qtime = $("#qtime").val();
     	var name1 = $("#name1").val();
     	var phone1 = $("#phone1").val();
     	

@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport"
-			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+			content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
 		<title>亚超</title>
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/iconfont.css">
@@ -257,7 +257,7 @@
 				<div id="scroll_div" class="fl">
 					<div id="scroll_begin" >
 						<font size="2" color="red">
-							这个网站为了更好的为你服务使用了cookie，您可以把它关闭，但是网站的功能会受到影响 <span
+							这个网站为了更好的为你服务使用了cookie，您可以把它关闭，但是网站的功能会受到影响！ <span
 							class="pad_right"> </span>
 						</font>
 	
@@ -265,6 +265,8 @@
 					<div id="scroll_end"></div>
 				</div>
 				<div class="right-in">
+					<span id="categoryName" style="margin-left:10px;">所有商品</span>
+					<hr>
 					<ul id="product-info" class="product-info">
 						
 					</ul>
@@ -345,12 +347,13 @@
 			
 			function adminPhone(obj){
 				
+				var phone = $(obj).attr("name");
+				
 				setTitle = '店铺联系方式';
-				setContents = '店长联系电话：'+$(obj).attr("name");
+				setContents = "店长联系电话：<a href='tel:"+phone+"'>"+phone+"</a>";
 				setButton = '["确认"]';
 				$(obj).openWindow(setTitle,setContents,setButton);
 				
-				//alert("店长联系电话："+$(obj).attr("name"));
 				
 			}
 			

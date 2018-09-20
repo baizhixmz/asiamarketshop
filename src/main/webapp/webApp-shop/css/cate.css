@@ -64,6 +64,13 @@ section
 
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    
+    white-space:nowrap;    
+
+	overflow:hidden;          
+
+	text-overflow: ellipsis; 
+    
 }
 .categary .categary-left > ul .active a
 {
@@ -73,7 +80,6 @@ section
 .categary .categary-right
 {
     overflow-y: auto;
-
     height: 100%;
 }
 .categary .categary-right

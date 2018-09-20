@@ -33,7 +33,14 @@ header {
 }
 
 header .title {
+	font-size: 20px;
 	margin-left: -70px;
+	margin-bottom: 0px;
+	font-family:"楷体","kaiTi","微软雅黑";
+}
+header .title1 {
+	font-size: 20px;
+	margin-left: -220px;
 	margin-bottom: 0px;
 	font-family:"楷体","kaiTi","微软雅黑";
 }

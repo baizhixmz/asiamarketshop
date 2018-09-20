@@ -74,16 +74,17 @@ $(function(){
 								var type = "";
 								
 								if(r == null){
-									type = "邮寄";
+									type = "配送方式：邮寄";
 								}else{
-									type = "上门取货";
+									type = "取货时间："+r;
 								}
 								
 								var orderListFooterStr = `<div class="orderListFooter">
-															<div>配送方式：${type}</div>
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												        	<div>共<span class="totalNum">${totalNum}</span>件商品 合计： <span class="totalPrice" style="color:#d8505c">€ ${ele.sorderEntity.orderSalary}</span></div>
-												        </div>`;
+															<div style="margin-right:10px;">${type}</div>
+												        	<div>共<span class="totalNum">${totalNum}</span>件商品 合计: <span class="totalPrice" style="color:#d8505c">€${ele.sorderEntity.orderSalary}</span></div>
+												        	
+												          </div>
+												          `;
 
 					        	$(".item .cart-shop-content").last().after(orderListFooterStr);
 

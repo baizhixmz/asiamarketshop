@@ -5,7 +5,7 @@
     <script src="${pageContext.request.contextPath}/webApp-shop/js/ContextPath.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <title>创建订单</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
@@ -135,7 +135,7 @@
 <!-- 头部 -->
 <header>
     <div class="left"></div>
-    <div class="title">创建订单</div>
+    <div class="title1">创建订单</div>
     <div class="right"></div>
 </header>
 
@@ -147,19 +147,34 @@
 		</ul>
 		<div class="layui-tab-content">
 			<div class="layui-tab-item layui-show">
-				<ul>
+				<table style="border-collapse:separate; border-spacing:0px 10px;">
+					<tr >
+						<td align="right">姓名：</td>
+						<td><input type="text" id="name1" name="name1"/></td>
+					</tr>
+					<tr>
+						<td align="right">手机号：</td>
+						<td><input type="text" id="phone1" name="phone1"/></td>
+					</tr>
+					<tr>
+						<td align="right">取货时间：</td>
+						<td><input type="text" readonly="readonly" id="qtime" value="选择取货时间"></td>
+					</tr>
+				</table>
+			
+				<!-- <ul>
 					<li>&nbsp;&nbsp;&nbsp;姓名：<input type="text" id="name1" name="name1"/></li>
 					<li>手机号：<input type="text" id="phone1" name="phone1"/><span id="tt"></span></li>
-					<li class='test' id='test'>选择取货时间</li>
+					<li class='test'>取货时间：<input type="text" readonly="readonly" id="test" value="选择取货时间"></li>
 				</ul>
-				
+				 -->
 				<script type="text/javascript">
 					$(document).ready(function(){
-						$('#test').on('click',function(){
+						$('#qtime').on('click',function(){
 							//数字为正整数，0表示当天可取
 							pickuptime.init(0,function(data){
 								console.log(data.split(" "));//回调
-								$("#test").html(data.split(" "));
+								$("#qtime").attr("value",data.split(" "));
 							});
 						});
 					});
@@ -244,7 +259,7 @@
     	
     	var totalPrice = $("#btnPrice").text().substring(2);
     	
-    	var qtime = $("#test").text();
+    	var qtime = $("#qtime").val();
     	var name1 = $("#name1").val();
     	var phone1 = $("#phone1").val();
     	

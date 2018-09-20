@@ -5,7 +5,7 @@
     <script src="${pageContext.request.contextPath}/webApp-shop/js/ContextPath.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <title>购物车</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
@@ -17,7 +17,7 @@
 <!-- 头部 -->
 <header>
     <div class="left"></div>
-    <div class="title">购物车</div>
+    <div class="title1">购物车</div>
     <div class="right"></div>
 </header>
 

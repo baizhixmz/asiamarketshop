@@ -4,7 +4,7 @@
 <script src="${pageContext.request.contextPath}/webApp-shop/js/ContextPath.js"></script>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
 	<title>Asiamarket</title>
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/iconfont.css">
@@ -221,9 +221,7 @@
         	<div id="scroll_div" class="fl">
 					<div id="scroll_begin" >
 						<font size="2" color="red">
-							"This website uses cookies to ensure
-							you get the best experience on our website，you can disable it but
-							the website will not function properly"
+							Diese Website verwendet Cookies, um Sie besser bedienen zu können.Sie können dies deaktivieren, aber die Funktionalität der Website wird beeinträchtigt!
 							<span class="pad_right"> </span> 
 						</font>
 	
@@ -232,6 +230,8 @@
 				</div>
         	
             <div class="right-in">
+            	<span id="categoryName" style="margin-left:10px;">Alle Kategorien</span>
+				<hr>
 				<ul id="product-info" class="product-info">
 
 				</ul>
@@ -310,8 +310,10 @@
 		
 		function adminPhone(obj){
 			
+			var phone = $(obj).attr("name");
+			
 			setTitle = 'Shop-Kontakt';
-			setContents = 'Manager-Kontaktnummer：'+$(obj).attr("name");
+			setContents = "Manager-Kontaktnummer：<a href='tel:"+phone+"'>"+phone+"</a>";
 			setButton = '["Bestätigen Sie"]';
 			$(obj).openWindow(setTitle,setContents,setButton);
 				
