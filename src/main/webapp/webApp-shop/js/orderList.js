@@ -39,7 +39,7 @@ $(function(){
 			                    	var nameArr = name.split("/");
 									
 									totalNum+=GoodsEle.count;
-									// console.log(GoodsEle);
+									
 									var orderListContentrStr = `<div class="item"><div class="cart-shop-content">
 											            <div class="cart-shop-content-right">
 											                <a href="#" class="product-img">

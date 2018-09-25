@@ -335,14 +335,6 @@
 				//alert();
 				loadRemoteData("${sessionScope.adminMsg.id}","${sessionScope.adminMsg.username}");
 			
-				$('.open-window-close-out-fail').on('click',function(){
-					setTitle = '店铺联系方式';
-					setContents = '网络异常平仓失败，请稍后再试';
-					setButton = '["确认"]';
-					$(this).openWindow(setTitle,setContents,setButton);
-				});
-				
-			
 			})
 			
 			function adminPhone(obj){
@@ -350,7 +342,7 @@
 				var phone = $(obj).attr("name");
 				
 				setTitle = '店铺联系方式';
-				setContents = "店长联系电话：<a href='tel:"+phone+"'>"+phone+"</a>";
+				setContents = "店长联系电话：<a href='tel:"+phone+"' style='color:#668BB0;'>"+phone+"</a>";
 				setButton = '["确认"]';
 				$(obj).openWindow(setTitle,setContents,setButton);
 				

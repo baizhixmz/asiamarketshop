@@ -47,7 +47,7 @@ public class OrderController {
 			String address, String qtime, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
-
+		
 		SuserEntity user = (SuserEntity) session.getAttribute("user");
 		user.setName(name);
 		user.setPhone(phone);

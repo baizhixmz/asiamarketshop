@@ -313,7 +313,7 @@
 			var phone = $(obj).attr("name");
 			
 			setTitle = 'Shop-Kontakt';
-			setContents = "Manager-Kontaktnummer：<a href='tel:"+phone+"'>"+phone+"</a>";
+			setContents = "Manager-Kontaktnummer：<a href='tel:"+phone+"' style='color:#668BB0;'>"+phone+"</a>";
 			setButton = '["Bestätigen Sie"]';
 			$(obj).openWindow(setTitle,setContents,setButton);
 				

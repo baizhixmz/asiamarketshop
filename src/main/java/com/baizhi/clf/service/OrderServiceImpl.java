@@ -49,6 +49,9 @@ public class OrderServiceImpl implements OrderService {
 		HttpSession session = request.getSession();
 
 		SuserEntity suserEntity = (SuserEntity) session.getAttribute("user");		
+
+		SurlEntity surlEntity = (SurlEntity)session.getAttribute("shopMsg");
+		
 		// 获取当前店主信息
 		Admin admin = (Admin) session.getAttribute("adminMsg");
 
@@ -60,20 +63,20 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrderSalary(new Double(salary));
 		order.setOrderStatus("待处理");
 		order.setTime(new Date());
-
+		
 		order.setUserId(suserEntity.getId());
 		order.setAdminId(admin.getId());
-
+		order.setShopId(surlEntity.getId());
 		// 插入订单数据
 		orderDAO.insertOrder(order);
 		
 		
-		GoEasy goEasy = new GoEasy("BC-57c75abca21540b89bf00e84e5d7c7f6");
-		goEasy.publish(admin.getId(), "您有一个新订单，请及时处理！！！");
+/*		GoEasy goEasy = new GoEasy("BC-57c75abca21540b89bf00e84e5d7c7f6");
+		goEasy.publish(admin.getId(), "您有一个新订单，请及时处理！！！");*/
 		
 		
 		// 添加当前订单信息入库 并添加订单项
-		Map<String, CartCarVO> cartCar = (Map<String, CartCarVO>) session.getAttribute("cartCar");
+		Map<String, CartCarVO> cartCar = (Map<String, CartCarVO>) session.getAttribute(surlEntity.getId()+"cartCar");
 
 		// 构建订单项数据并插入
 		for (String s : cartCar.keySet()) {
@@ -94,14 +97,13 @@ public class OrderServiceImpl implements OrderService {
 			orderDAO.insertOrderItem(orderItem);
 		}
 		// 插入完数据清空购物车
-		session.setAttribute("cartCar", null);
+		session.setAttribute(surlEntity.getId()+"cartCar", null);
 		return orderNo;
 	}
 
 	@Override
 	public List<Map<SorderEntity, List<CartCarVO>>> findOrders() {
 
-		System.out.println("----------------------");
 
 		// 订单项数据 包含 订单对象 -- >对应多个 购物车对象
 		List<Map<SorderEntity, List<CartCarVO>>> data = new ArrayList<Map<SorderEntity, List<CartCarVO>>>();
@@ -120,10 +122,12 @@ public class OrderServiceImpl implements OrderService {
 		sorderEntity.setAdminId(admin.getId());
 
 		SuserEntity user = (SuserEntity) session.getAttribute("user");
+		SurlEntity surlEntity = (SurlEntity) session.getAttribute("shopMsg");
 
 		log.debug("sessionUser:" + user);
 
 		sorderEntity.setUserId(user.getId());
+		sorderEntity.setShopId(surlEntity.getId());
 		// 通过 外键和 店主id 获取用户在当前店铺的订单数据
 		List<SorderEntity> sorderEntities = orderDAO.selectOrders(sorderEntity);
 

@@ -95,15 +95,15 @@ $(function(){
 								var type = "";
 								
 								if(r == null){
-									type = "Mailing";
+									type = "Versandart: Versand";
 								}else{
-									type = "Abholung";
+									type = "Abholzeit:"+r;
 								}
 								
 								
 								var orderListFooterStr = `<div class="orderListFooter">
-															<div>Lieferart：${type}</div>&nbsp;
-												        	<div>Totale<span class="totalNum"> ${totalNum} </span>prodotti totale： <span class="totalPrice" style="color:#d8505c">€ ${ele.sorderEntity.orderSalary}</span></div>
+															<div style="margin-right:20px;">${type}</div>&nbsp;
+												        	<div>Menge:<span class="totalNum"> ${totalNum} </span> Summe：<span class="totalPrice" style="color:#d8505c">€ ${ele.sorderEntity.orderSalary}</span></div>
 												        </div>`;
 
 					        	$(".item .cart-shop-content").last().after(orderListFooterStr);
